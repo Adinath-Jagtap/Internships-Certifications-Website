@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs & Internships - Community Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #000000;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 72px;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Page Header */
+    .page-header,
+    .roadmaps-page .page-header .container {
+        text-align: center;
+        padding: 64px 24px 48px;
+    }
+
+    .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ffffff, #666666);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+        letter-spacing: -1.5px;
+    }
+
+    .page-header p {
+        font-size: 18px;
+        color: #888888;
+    }
+
+    /* Filters Section */
+    .filters-section {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 32px;
+        margin: 0 24px 48px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .filters-section h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    .filters-wrapper,
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filter-group label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #b0b0b0;
+    }
+
+    .filter-select,
+    #searchInput,
+    select {
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .filter-select:hover,
+    #searchInput:hover,
+    select:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .filter-select:focus,
+    #searchInput:focus,
+    select:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #searchInput {
+        cursor: text;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #333333, #222222);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+    /* Fix dropdown option text visibility */
+.filter-select option,
+select option {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+#searchInput::placeholder {
+    color: #666666;
+}
+
+    /* Content Grid */
+    .content-section {
+        padding: 0 24px 80px;
+    }
+
+    .content-grid,
+    .jobs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Content Cards */
+    .content-card,
+    .job-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-card:hover,
+    .job-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .job-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-content,
+    .job-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .card-header h3,
+    .job-content h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.3px;
+        flex: 1;
+    }
+
+    /* Badges */
+    .difficulty-badge,
+    .badge {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: capitalize;
+        white-space: nowrap;
+    }
+
+    .difficulty-beginner {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .difficulty-intermediate {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .difficulty-advanced {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .badge {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    /* Card Meta & Details */
+    .card-meta,
+    .job-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .meta-item,
+    .location {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #888888;
+    }
+
+    .icon-tag::before {
+        content: "🏷️";
+        font-size: 14px;
+    }
+
+    .card-description,
+    .job-description {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #b0b0b0;
+    }
+
+    .company-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #888888;
+    }
+
+    .salary {
+        font-size: 16px;
+        font-weight: 700;
+        color: #4ade80;
+    }
+
+    /* Card Footer */
+    .card-footer,
+    .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: auto;
+    }
+
+    .time-ago {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 80px 24px;
+        grid-column: 1 / -1;
+    }
+
+    .empty-state h2,
+    .empty-state h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+    }
+
+    .empty-state p {
+        font-size: 16px;
+        color: #888888;
+    }
+
+    .icon-empty::before,
+    .icon-search::before {
+        content: "📭";
+        font-size: 64px;
+        display: block;
+        margin-bottom: 24px;
+    }
+
+    .icon-search::before {
+        content: "🔍";
+    }
+
+    /* Modal */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+    }
+
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+        position: relative;
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 24px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-header h2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .modal-close {
+        background: transparent;
+        border: none;
+        color: #888888;
+        font-size: 32px;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+        color: #ffffff;
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-body p {
+        font-size: 15px;
+        color: #b0b0b0;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+    .roadmap-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 16px;
+    }
+
+    .roadmap-warning {
+        color: #fbbf24;
+        font-size: 14px;
+    }
+
+    .modal-footer {
+        display: flex;
+        gap: 12px;
+        padding: 16px 24px 24px;
+        justify-content: flex-end;
+    }
+
+    /* Jobs Container */
+    .jobs-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .content-grid,
+        .jobs-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding-top: 68px;
+        }
+
+        .page-header,
+        .roadmaps-page .page-header .container {
+            padding: 48px 20px 32px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+        }
+
+        .filters-section {
+            padding: 24px;
+            margin: 0 20px 40px;
+        }
+
+        .content-section {
+            padding: 0 20px 80px;
+        }
+
+        .content-grid,
+        .jobs-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding-top: 64px;
+        }
+
+        .page-header,
+        .roadmaps-page .page-header .container {
+            padding: 40px 16px 24px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+        }
+
+        .filters-section {
+            padding: 20px;
+            margin: 0 16px 32px;
+        }
+
+        .filters-section h3 {
+            font-size: 18px;
+        }
+
+        .content-section {
+            padding: 0 16px 80px;
+        }
+
+        .card-content,
+        .job-content {
+            padding: 20px;
+        }
+
+        .card-header h3,
+        .job-content h3 {
+            font-size: 18px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        .modal-content {
+            margin: 0 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+        }
+
+        .modal-body p {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        body {
+            padding-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .filters-section {
+            padding: 16px;
+        }
+
+        .card-content,
+        .job-content {
+            padding: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    
+    <div class="jobs-container">
+        <div class="page-header">
+            <h1>Jobs & Internships</h1>
+            <p>Find your next career opportunity</p>
+        </div>
+        
+        <div class="filters-section">
+            <h3>Filter Opportunities</h3>
+                <div class="filters-grid">
+                    <select id="jobTypeFilter" onchange="applyFilters()">
+                        <option value="">All Types</option>
+                        <option value="job">Job</option>
+                        <option value="internship">Internship</option>
+                    </select>
+                    
+                    <select id="locationFilter" onchange="applyFilters()">
+                        <option value="">All Locations</option>
+                        <option value="remote">Remote</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="pune">Pune</option>
+                    </select>
+                    
+                    <select id="experienceFilter" onchange="applyFilters()">
+                        <option value="">All Experience Levels</option>
+                        <option value="0-1">0-1 years</option>
+                        <option value="1-3">1-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5+">5+ years</option>
+                    </select>
+                    
+                    <select id="dateFilter" onchange="applyFilters()">
+                        <option value="">All Time</option>
+                        <option value="24h">Last 24 Hours</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                    
+                    <input type="text" id="searchInput" placeholder="Search jobs..." onkeyup="searchJobs()">
+                    
+                    <button onclick="clearFilters()" class="btn-secondary">Clear Filters</button>
+                </div>
+        </div>
+        
+        <div class="jobs-grid" id="jobsGrid">
+                {% for job in jobs %}
+                    <div class="job-card" data-type="{{ job.job_type }}" data-location="{{ job.location }}" data-experience="{{ job.required_experience }}">
+                        {% if job.image and job.image != 'N/A' %}
+                            <img src="{{ job.image }}" alt="{{ job.company_name }}" class="job-image">
+                        {% endif %}
+                        
+                        <div class="job-content">
+                            <h3>{{ job.role if job.role != 'N/A' else 'Position Available' }}</h3>
+                            <p class="company-name">{{ job.company_name if job.company_name != 'N/A' else 'Company' }}</p>
+                            
+                            <div class="job-details">
+                                <span class="badge">{{ job.job_type|upper if job.job_type != 'N/A' else 'POSITION' }}</span>
+                                {% if job.location and job.location != 'N/A' %}
+                                    <span class="location">📍 {{ job.location }}</span>
+                                {% endif %}
+                                {% if job.required_experience and job.required_experience != 'N/A' %}
+                                    <span class="badge">{{ job.required_experience }} exp</span>
+                                {% endif %}
+                            </div>
+                            
+                            {% if job.stipend_salary and job.stipend_salary != 'N/A' %}
+                                <p class="salary">{{ job.stipend_salary }}</p>
+                            {% endif %}
+                            
+                            {% if job.description and job.description != 'N/A' and job.description|length > 0 %}
+                                <p class="job-description">{{ job.description[:150] }}{% if job.description|length > 150 %}...{% endif %}</p>
+                            {% endif %}
+                            
+                            <div class="job-footer">
+                                <span class="time-ago">{{ job.time_ago }}</span>
+                                <a href="{{ url_for('detail_page', content_type='job', id=job._id) }}" class="btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+        
+        {% if not jobs %}
+            <div class="empty-state">
+                <h2>No Jobs Available</h2>
+                <p>Check back later for new opportunities</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% include 'partials/footer.html' %}
+    
+<script>
+function applyFilters() {
+    const jobType = document.getElementById('jobTypeFilter').value;
+    const location = document.getElementById('locationFilter').value;
+    const experience = document.getElementById('experienceFilter').value;
+    const date = document.getElementById('dateFilter').value;
+    
+    let url = '/api/filter/jobs?';
+    if (jobType) url += `job_type=${jobType}&`;
+    if (location) url += `location=${location}&`;
+    if (experience) url += `experience=${experience}&`;
+    if (date) url += `date=${date}&`;
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => updateJobsGrid(data))
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('jobsGrid').innerHTML = 
+                '<div class="empty-state"><h2>Error Loading Jobs</h2><p>Please try again</p></div>';
+        });
+}
+
+function searchJobs() {
+    const query = document.getElementById('searchInput').value;
+    if (query.length < 2) return;
+    
+    fetch(`/api/search?q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            const jobs = data.filter(item => item.type === 'job');
+            updateJobsGrid(jobs);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function updateJobsGrid(jobs) {
+    const grid = document.getElementById('jobsGrid');
+    
+    if (jobs.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><h2>No Results Found</h2><p>Try adjusting your filters</p></div>';
+        return;
+    }
+    
+    grid.innerHTML = jobs.map(job => `
+        <div class="job-card">
+            ${job.image && job.image !== 'N/A' ? `<img src="${job.image}" alt="${job.company_name}" class="job-image">` : ''}
+            <div class="job-content">
+                <h3>${job.role && job.role !== 'N/A' ? job.role : 'Position Available'}</h3>
+                <p class="company-name">${job.company_name && job.company_name !== 'N/A' ? job.company_name : 'Company'}</p>
+                <div class="job-details">
+                    <span class="badge">${job.job_type && job.job_type !== 'N/A' ? job.job_type.toUpperCase() : 'POSITION'}</span>
+                    ${job.location && job.location !== 'N/A' ? `<span class="location">📍 ${job.location}</span>` : ''}
+                    ${job.required_experience && job.required_experience !== 'N/A' ? `<span class="badge">${job.required_experience} exp</span>` : ''}
+                </div>
+                ${job.stipend_salary && job.stipend_salary !== 'N/A' ? `<p class="salary">${job.stipend_salary}</p>` : ''}
+                ${job.description && job.description !== 'N/A' ? `<p class="job-description">${job.description.substring(0, 150)}...</p>` : ''}
+                <div class="job-footer">
+                    <span class="time-ago">${job.time_ago}</span>
+                    <a href="/detail/job/${job._id}" class="btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function clearFilters() {
+    document.getElementById('jobTypeFilter').value = '';
+    document.getElementById('locationFilter').value = '';
+    document.getElementById('experienceFilter').value = '';
+    document.getElementById('dateFilter').value = '';
+    document.getElementById('searchInput').value = '';
+    location.reload();
+}
+</script>
+<!-- Ad Popup -->
+<div class="ad-popup" id="ad-popup" style="display: none;">
+    <div class="ad-popup-overlay" onclick="closeAdPopup()"></div>
+    <div class="ad-popup-content">
+        <button class="ad-popup-close" onclick="closeAdPopup()" aria-label="Close ad">
+            <span style="font-size: 28px; color: #e0e0e0; line-height: 1;">×</span>
+        </button>
+        
+        <div class="ad-popup-body">
+            <div class="ad-popup-image">
+                <img id="ad-popup-img" src="" alt="Advertisement">
+            </div>
+            <div class="ad-popup-info">
+                <h3 id="ad-popup-title"></h3>
+                <p id="ad-popup-description"></p>
+                <a href="#" id="ad-popup-link" class="btn-primary" target="_blank" onclick="trackAdClick()">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Corner Ad -->
+<div class="corner-ad" id="corner-ad" style="display: none;">
+    <button class="corner-ad-close" onclick="closeCornerAd()" aria-label="Close ad">
+        <span style="font-size: 24px; color: #e0e0e0; line-height: 1;">×</span>
+    </button>
+    <a href="#" id="corner-ad-link" target="_blank" onclick="trackCornerAdClick()">
+        <img id="corner-ad-img" src="" alt="Advertisement">
+    </a>
+</div>
+
+<style>
+/* Ad Popup Styles */
+.ad-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ad-popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.ad-popup-content {
+    position: relative;
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ad-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.ad-popup-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(90deg);
+}
+
+.ad-popup-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 85vh;
+}
+
+.ad-popup-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #0a0a0a;
+    position: relative;
+}
+
+.ad-popup-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #1a1a1a, transparent);
+}
+
+.ad-popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ad-popup-info {
+    padding: 32px 28px;
+}
+
+.ad-popup-info h3 {
+    margin: 0 0 16px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.ad-popup-info p {
+    margin: 0 0 24px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+/* Corner Ad Styles */
+.corner-ad {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 280px;
+    max-width: calc(100vw - 48px);
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+    animation: slideInCorner 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInCorner {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.corner-ad-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.corner-ad-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotate(90deg);
+}
+
+.corner-ad a {
+    display: block;
+}
+
+.corner-ad img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.corner-ad:hover img {
+    transform: scale(1.03);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .corner-ad {
+        width: 260px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .corner-ad img {
+        max-height: 350px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .ad-popup-content {
+        width: 95%;
+        max-width: 500px;
+    }
+    
+    .ad-popup-image {
+        height: 220px;
+    }
+    
+    .ad-popup-info {
+        padding: 24px 20px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 22px;
+    }
+    
+    .corner-ad {
+        width: 240px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .corner-ad img {
+        max-height: 300px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .ad-popup-content {
+        width: 96%;
+        max-width: 400px;
+    }
+    
+    .ad-popup-image {
+        height: 180px;
+    }
+    
+    .ad-popup-info {
+        padding: 20px 16px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 20px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 14px;
+    }
+    
+    .corner-ad {
+        width: 200px;
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    .corner-ad img {
+        max-height: 250px;
+    }
+    
+    .corner-ad-close {
+        width: 28px;
+        height: 28px;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+    .ad-popup-content {
+        width: 98%;
+    }
+    
+    .ad-popup-image {
+        height: 160px;
+    }
+    
+    .ad-popup-info {
+        padding: 16px 12px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+    
+    .corner-ad {
+        width: 180px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 220px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .corner-ad {
+        width: 200px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 200px;
+    }
+}
+</style>
+
+<script>
+let currentAdId = null;
+let cornerAdId = null;
+let popupShown = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch and display ads
+    fetchAds();
+    
+    // Show popup ad after 5 seconds
+    setTimeout(function() {
+        if (!popupShown && !sessionStorage.getItem('ad_popup_shown')) {
+            showPopupAd();
+            sessionStorage.setItem('ad_popup_shown', 'true');
+        }
+    }, 5000);
+});
+
+function fetchAds() {
+    fetch('/api/get-ads')
+        .then(response => response.json())
+        .then(ads => {
+            console.log('Ads fetched:', ads); // Debug
+            if (ads && ads.length > 0) {
+                // Show popup ad (first ad)
+                if (ads[0]) {
+                    setupPopupAd(ads[0]);
+                }
+                
+                // Show corner ad (second ad if available)
+                if (ads[1]) {
+                    setupCornerAd(ads[1]);
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching ads:', error));
+}
+
+function setupPopupAd(ad) {
+    currentAdId = ad._id;
+    document.getElementById('ad-popup-img').src = ad.image || '';
+    document.getElementById('ad-popup-title').textContent = ad.title || '';
+    document.getElementById('ad-popup-description').textContent = ad.description || '';
+    document.getElementById('ad-popup-link').href = ad.link || '#';
+    
+    // Track impression
+    trackAdImpression(ad._id);
+}
+
+function setupCornerAd(ad) {
+    cornerAdId = ad._id;
+    document.getElementById('corner-ad-img').src = ad.image || '';
+    document.getElementById('corner-ad-link').href = ad.link || '#';
+    
+    // Show corner ad after 10 seconds
+    setTimeout(function() {
+        document.getElementById('corner-ad').style.display = 'block';
+        trackAdImpression(ad._id);
+    }, 10000);
+}
+
+function showPopupAd() {
+    const popup = document.getElementById('ad-popup');
+    if (popup && currentAdId) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        popupShown = true;
+    }
+}
+
+function closeAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function closeCornerAd() {
+    document.getElementById('corner-ad').style.display = 'none';
+}
+
+function trackAdClick() {
+    if (currentAdId) {
+        fetch(`/ad/click/${currentAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackCornerAdClick() {
+    if (cornerAdId) {
+        fetch(`/ad/click/${cornerAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Corner ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackAdImpression(adId) {
+    fetch(`/ad/impression/${adId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(() => console.log('Impression tracked'))
+      .catch(error => console.error('Error tracking impression:', error));
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeAdPopup();
+    }
+});
+</script>
+
+</body>
+</html>
+
+

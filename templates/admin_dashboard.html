@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Community Platform</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding-top: 72px;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Admin Dashboard Container */
+.admin-dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 16px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: start;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Admin Header */
+.admin-header {
+    grid-column: 1 / -1;
+    margin-bottom: 24px;
+}
+
+.admin-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #666666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.admin-header p {
+    font-size: 16px;
+    color: #888888;
+}
+
+/* Alert Messages */
+.alert {
+    grid-column: 1 / -1;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: rgba(46, 125, 50, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #81c784;
+}
+
+.alert-error,
+.alert-danger {
+    background: rgba(198, 40, 40, 0.15);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #e57373;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    position: sticky;
+    top: 96px;
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-nav .nav-link {
+    padding: 12px 16px;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.admin-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.admin-nav .nav-link.active {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Admin Content */
+.admin-content {
+    width: 100%;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #888888;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #666666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Content Section */
+.content-section,
+.users-section,
+.edit-section {
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.content-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Forms */
+.add-form {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.add-form h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="file"],
+select,
+textarea {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* FIX FOR DROPDOWN OPTIONS - This is the key fix */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Style the dropdown options */
+select option {
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+}
+
+select:focus option {
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+/* For Firefox */
+select option:checked {
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+/* For Internet Explorer */
+select::-ms-expand {
+    display: none;
+}
+
+select option:hover,
+select option:focus {
+    background: #333333;
+    color: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.03);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b0b0b0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary,
+.btn-edit,
+.btn-delete {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #333333, #222222);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-edit {
+    background: rgba(46, 125, 50, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #81c784;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.btn-edit:hover {
+    background: rgba(46, 125, 50, 0.25);
+}
+
+.btn-delete {
+    background: rgba(198, 40, 40, 0.15);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #e57373;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.btn-delete:hover {
+    background: rgba(198, 40, 40, 0.25);
+}
+
+/* MOBILE TABLE SCROLLING FIX */
+.table-scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 24px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.data-table thead {
+    background: rgba(255, 255, 255, 0.03);
+    position: sticky;
+    left: 0;
+}
+
+.data-table th {
+    padding: 16px 12px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #b0b0b0;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.data-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table td.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: sticky;
+    right: 0;
+    background: inherit;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.data-table td a {
+    color: #64b5f6;
+    text-decoration: none;
+}
+
+.data-table td a:hover {
+    text-decoration: underline;
+}
+
+.data-table img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .admin-dashboard-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 12px;
+    }
+
+    .admin-sidebar {
+        position: static;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .admin-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .admin-nav .nav-link {
+        flex: 1;
+        min-width: 140px;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    .admin-dashboard-container {
+        padding: 16px 8px;
+        gap: 16px;
+    }
+
+    .admin-header {
+        margin-bottom: 16px;
+        text-align: center;
+        padding: 0 8px;
+    }
+
+    .admin-header h1 {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .admin-header p {
+        font-size: 14px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+        padding: 0 4px;
+    }
+
+    .stat-card {
+        padding: 16px 12px;
+        min-height: auto;
+    }
+
+    .stat-number {
+        font-size: 22px;
+        word-break: break-word;
+    }
+
+    .content-section,
+    .users-section,
+    .edit-section {
+        padding: 20px 16px;
+        margin: 0;
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .content-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .content-header h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    /* Mobile dropdown fixes */
+    select {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 12px 40px 12px 14px;
+        background-size: 14px;
+        background-position: right 14px center;
+    }
+
+    select option {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* MOBILE TABLE SCROLLING */
+    .table-scroll-container {
+        margin: 16px -8px;
+        width: calc(100% + 16px);
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .data-table {
+        min-width: 700px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 12px 10px;
+        font-size: 13px;
+        min-width: 120px;
+    }
+
+    .data-table td.actions {
+        position: sticky;
+        right: 0;
+        background: linear-gradient(90deg, transparent 0%, #1a1a1a 10%);
+        border-left: 2px solid rgba(255, 255, 255, 0.15);
+        padding: 12px 10px;
+        gap: 6px;
+        z-index: 2;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        min-height: 36px;
+        padding: 8px 12px;
+        font-size: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* Form improvements for mobile */
+    form {
+        gap: 12px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="file"],
+    textarea {
+        padding: 12px 14px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"] {
+        font-size: 14px;
+    }
+
+    .add-form {
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    /* Alert improvements for mobile */
+    .alert {
+        margin: 0 -8px 16px -8px;
+        border-radius: 0;
+        padding: 12px 16px;
+        font-size: 13px;
+        width: calc(100% + 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-dashboard-container {
+        padding: 12px 6px;
+    }
+
+    .admin-header h1 {
+        font-size: 22px;
+    }
+
+    .admin-nav {
+        flex-direction: column;
+    }
+
+    .admin-nav .nav-link {
+        min-width: auto;
+        text-align: left;
+        padding: 10px 12px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 14px 12px;
+    }
+
+    .stat-number {
+        font-size: 20px;
+    }
+
+    .content-section,
+    .users-section,
+    .edit-section {
+        padding: 16px 12px;
+    }
+
+    /* Extra small devices table optimization */
+    .table-scroll-container {
+        margin: 12px -6px;
+        width: calc(100% + 12px);
+    }
+
+    .data-table {
+        min-width: 650px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+        min-width: 100px;
+    }
+
+    .data-table td.actions {
+        padding: 10px 8px;
+        gap: 4px;
+    }
+
+    .data-table td.actions .btn-edit,
+    .data-table td.actions .btn-delete {
+        min-width: 55px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+}
+
+/* Fix for very large screens */
+@media (min-width: 1400px) {
+    .admin-dashboard-container {
+        padding: 40px 20px;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Scrollbar styling for mobile */
+.table-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Additional dropdown styling for better browser compatibility */
+select:-internal-list-box {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+select:focus {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* For older browsers */
+select {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: #ffffff !important;
+}
+    </style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    
+    <div class="admin-dashboard-container">
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <p>Manage platform content and users</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-link">Dashboard Home</a>
+                <a href="{{ url_for('admin_users') }}" class="nav-link">Users</a>
+                <a href="{{ url_for('admin_content', content_type='jobs') }}" class="nav-link">Jobs & Internships</a>
+                <a href="{{ url_for('admin_content', content_type='workshops') }}" class="nav-link">Workshops</a>
+                <a href="{{ url_for('admin_content', content_type='courses') }}" class="nav-link">Courses</a>
+                <a href="{{ url_for('admin_content', content_type='hackathons') }}" class="nav-link">Hackathons</a>
+                <a href="{{ url_for('admin_content', content_type='roadmaps') }}" class="nav-link">Roadmaps</a>
+                <a href="{{ url_for('admin_content', content_type='websites') }}" class="nav-link">Websites</a>
+                <a href="{{ url_for('admin_content', content_type='ads') }}" class="nav-link">Advertisements</a>
+            </nav>
+        </div>
+        
+        <div class="admin-content">
+            {% if not section %}
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p class="stat-number">{{ stats.total_users }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Jobs & Internships</h3>
+                        <p class="stat-number">{{ stats.total_jobs }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Workshops</h3>
+                        <p class="stat-number">{{ stats.total_workshops }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Courses</h3>
+                        <p class="stat-number">{{ stats.total_courses }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Hackathons</h3>
+                        <p class="stat-number">{{ stats.total_hackathons }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Roadmaps</h3>
+                        <p class="stat-number">{{ stats.total_roadmaps }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Websites</h3>
+                        <p class="stat-number">{{ stats.total_websites }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Active Ads</h3>
+                        <p class="stat-number">{{ stats.active_ads }} / {{ stats.total_ads }}</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Total Ad Clicks</h3>
+                        <p class="stat-number">{{ stats.total_ad_clicks }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            
+            {% if section == 'users' %}
+                <div class="users-section">
+                    <h2>All Users</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>College/Organization</th>
+                                <th>Phone</th>
+                                <th>Registered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.college }}</td>
+                                    <td>{{ user.phone if user.phone else 'N/A' }}</td>
+                                    <td>{{ user.created_at.strftime('%Y-%m-%d') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            
+            {% if section == 'content' %}
+                <div class="content-section">
+                    <div class="content-header">
+                        <h2>{{ content_type|title }} Management</h2>
+                        <button class="btn-primary" onclick="showAddForm()">Add New {{ content_type|title }}</button>
+                    </div>
+                    
+                    <div class="add-form" id="addForm" style="display: none;">
+                        <h3>Add New {{ content_type|title }}</h3>
+                        <form method="POST" action="{{ url_for('admin_add_content', content_type=content_type) }}" enctype="multipart/form-data">
+                            {% if content_type == 'jobs' %}
+                                <input type="text" name="company_name" placeholder="Company Name" required>
+                                <input type="text" name="role" placeholder="Role/Position" required>
+                                <input type="url" name="official_link" placeholder="Application Link" required>
+                                <input type="text" name="stipend_salary" placeholder="Stipend/Salary">
+                                <input type="text" name="location" placeholder="Location" required>
+                                <select name="job_type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="job">Job</option>
+                                    <option value="internship">Internship</option>
+                                </select>
+                                <input type="text" name="required_experience" placeholder="Required Experience (e.g., 0-1 years)">
+                                <textarea name="description" placeholder="Job Description" required></textarea>
+                                <input type="text" name="requirements" placeholder="Requirements (comma-separated)">
+                                <input type="file" name="image" accept="image/*">
+                                <label><input type="checkbox" name="promote_as_ad"> Promote as Ad</label>
+                        
+                            <!-- 2. UPDATE WORKSHOPS FORM - Replace workshops section with: -->
+                            {% elif content_type == 'workshops' %}
+                                <input type="text" name="name" placeholder="Workshop Name" required>
+                                <input type="url" name="official_link" placeholder="Registration Link" required>
+                                <select name="price" required>
+                                    <option value="">Select Price Type</option>
+                                    <option value="free">Free</option>
+                                    <option value="paid">Paid</option>
+                                </select>
+                                <input type="number" name="price_amount" placeholder="Price Amount (if paid)">
+                                <input type="text" name="location" placeholder="Location (online/city)" required>
+                                <label><input type="checkbox" name="certification"> Provides Certification</label>
+                                <input type="file" name="image" accept="image/*">
+                                <label><input type="checkbox" name="promote_as_ad"> Promote as Ad</label>
+                     
+
+                            <!-- 3. UPDATE COURSES FORM - Replace courses section with: -->
+                            {% elif content_type == 'courses' %}
+                                <input type="text" name="name" placeholder="Course Name" required>
+                                <input type="url" name="official_link" placeholder="Registration Link" required>
+                                <select name="price" required>
+                                    <option value="">Select Price Type</option>
+                                    <option value="free">Free</option>
+                                    <option value="paid">Paid</option>
+                                </select>
+                                <input type="number" name="price_amount" placeholder="Price Amount (if paid)">
+                                <label><input type="checkbox" name="certification"> Provides Certification</label>
+                                <input type="file" name="image" accept="image/*">
+                                <label><input type="checkbox" name="promote_as_ad"> Promote as Ad</label>
+                      
+
+                            <!-- 4. UPDATE HACKATHONS FORM - Replace hackathons section with: -->
+                            {% elif content_type == 'hackathons' %}
+                                <input type="text" name="name" placeholder="Hackathon Name" required>
+                                <input type="url" name="official_link" placeholder="Registration Link" required>
+                                <select name="price" required>
+                                    <option value="">Select Price Type</option>
+                                    <option value="free">Free</option>
+                                    <option value="paid">Paid</option>
+                                </select>
+                                <input type="number" name="price_amount" placeholder="Price Amount (if paid)">
+                                <input type="text" name="location" placeholder="Location (online/city)" required>
+                                <input type="text" name="prize_pool" placeholder="Prize Pool">
+                                <input type="text" name="team_size" placeholder="Team Size (e.g., 2-4 members)">
+                                <input type="file" name="image" accept="image/*">
+                                <label><input type="checkbox" name="promote_as_ad"> Promote as Ad</label>
+                  
+                            {% elif content_type == 'roadmaps' %}
+                                <input type="text" name="title" placeholder="Roadmap Title" required>
+                                <input type="text" name="domain" placeholder="Domain" required>
+                                <input type="url" name="roadmap_link" placeholder="Roadmap Link" required>
+                                <textarea name="description" placeholder="Description"></textarea>
+                                <select name="difficulty">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select>
+                            {% elif content_type == 'websites' %}
+                                <input type="text" name="name" placeholder="Website Name" required>
+                                <input type="url" name="link" placeholder="Website URL" required>
+                                <textarea name="description" placeholder="Description"></textarea>
+                                <input type="file" name="image" accept="image/*">
+                                <label><input type="checkbox" name="is_project"> Our Project</label>
+                            {% elif content_type == 'ads' %}
+                                <input type="text" name="title" placeholder="Ad Title" required>
+                                <select name="ad_type" required>
+                                    <option value="">Select Ad Type</option>
+                                    <option value="product">Product</option>
+                                    <option value="sponsored_content">Sponsored Content</option>
+                                </select>
+                                <input type="url" name="link" placeholder="Ad Link" required>
+                                <select name="position">
+                                    <option value="popup">Popup</option>
+                                    <option value="corner">Corner</option>
+                                    <option value="inline">Inline</option>
+                                </select>
+                                <input type="file" name="image" accept="image/*" required>
+                                <label><input type="checkbox" name="active" checked> Active</label>
+                            {% endif %}
+                            <button type="submit" class="btn-primary">Add {{ content_type|title }}</button>
+                            <button type="button" class="btn-secondary" onclick="hideAddForm()">Cancel</button>
+                        </form>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                {% if content_type == 'jobs' %}
+                                    <th>Company</th>
+                                    <th>Role</th>
+                                    <th>Location</th>
+                                    <th>Type</th>
+                                    <th>Experience</th>
+                                    <th>Posted</th>
+                                {% elif content_type in ['workshops', 'courses', 'hackathons'] %}
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                    <th>Posted</th>
+                                {% elif content_type == 'roadmaps' %}
+                                        <th>Title</th>
+                                        <th>Link</th>
+                                {% elif content_type == 'websites' %}
+                                    <th>Name</th>
+                                    <th>Link</th>
+                                    <th>Is Project</th>
+                                {% elif content_type == 'ads' %}
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Position</th>
+                                    <th>Clicks</th>
+                                    <th>Status</th>
+                                {% endif %}
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in content %}
+                                <tr>
+                                    {% if content_type == 'jobs' %}
+                                        <td>{{ item.company_name if item.company_name != 'N/A' else '-' }}</td>
+                                        <td>{{ item.role if item.role != 'N/A' else '-' }}</td>
+                                        <td>{{ item.location if item.location != 'N/A' else '-' }}</td>
+                                        <td>{{ item.job_type if item.job_type != 'N/A' else '-' }}</td>
+                                        <td>{{ item.required_experience if item.required_experience != 'N/A' else '-' }}</td>
+                                        <td>{{ item.posted_at.strftime('%Y-%m-%d') if item.posted_at else '-' }}</td>
+                                    {% elif content_type in ['workshops', 'courses', 'hackathons'] %}
+                                        <td>{{ item.name if item.name != 'N/A' else '-' }}</td>
+                                        <td>{{ item.price if item.price != 'N/A' else '-' }}</td>
+                                        <td>{{ item.location if item.location != 'N/A' else '-' }}</td>
+                                        <td>{{ item.posted_at.strftime('%Y-%m-%d') if item.posted_at else '-' }}</td>
+                                    {% elif content_type == 'roadmaps' %}
+                                        <td>{{ item.title if item.title != 'N/A' else '-' }}</td>
+                                        <td><a href="{{ item.roadmap_link }}" target="_blank">View Link</a></td>
+                                       
+                                    {% elif content_type == 'websites' %}
+                                        <td>{{ item.name }}</td>
+                                        <td><a href="{{ item.link }}" target="_blank">{{ item.link }}</a></td>
+                                        <td>{{ 'Yes' if item.is_project else 'No' }}</td>
+                                    {% elif content_type == 'ads' %}
+                                        <td>{{ item.title }}</td>
+                                        <td>{{ item.ad_type }}</td>
+                                        <td>{{ item.position }}</td>
+                                        <td>{{ item.clicks if item.clicks else 0 }}</td>
+                                        <td>{{ 'Active' if item.active else 'Inactive' }}</td>
+                                    {% endif %}
+                                    <td class="actions">
+                                        <a href="{{ url_for('admin_edit_content', content_type=content_type, id=item._id) }}" class="btn-edit">Edit</a>
+                                        <form method="POST" action="{{ url_for('admin_delete_content', content_type=content_type, id=item._id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this?');">
+                                            <button type="submit" class="btn-delete">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            
+            {% if section == 'edit' %}
+                <div class="edit-section">
+                    <h2>Edit {{ content_type|title }}</h2>
+                    <form method="POST" action="{{ url_for('admin_edit_content', content_type=content_type, id=item._id) }}" enctype="multipart/form-data">
+                        {% if content_type == 'jobs' %}
+                            <input type="text" name="company_name" value="{{ item.company_name if item.company_name != 'N/A' else '' }}" placeholder="Company Name" required>
+                            <input type="text" name="role" value="{{ item.role if item.role != 'N/A' else '' }}" placeholder="Role/Position" required>
+                            <input type="url" name="official_link" value="{{ item.official_link if item.official_link != 'N/A' else '' }}" placeholder="Application Link" required>
+                            <input type="text" name="stipend_salary" value="{{ item.stipend_salary if item.stipend_salary != 'N/A' else '' }}" placeholder="Stipend/Salary">
+                            <input type="text" name="location" value="{{ item.location if item.location != 'N/A' else '' }}" placeholder="Location" required>
+                            <select name="job_type" required>
+                                <option value="job" {% if item.job_type == 'job' %}selected{% endif %}>Job</option>
+                                <option value="internship" {% if item.job_type == 'internship' %}selected{% endif %}>Internship</option>
+                            </select>
+                            <input type="text" name="required_experience" value="{{ item.required_experience if item.required_experience != 'N/A' else '' }}" placeholder="Required Experience">
+                            <textarea name="description" placeholder="Job Description" required>{{ item.description if item.description != 'N/A' else '' }}</textarea>
+                            <input type="text" name="requirements" value="{{ item.requirements|join(', ') if item.requirements and item.requirements != 'N/A' else '' }}" placeholder="Requirements (comma-separated)">
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="promote_as_ad" {% if item.has_ad %}checked{% endif %}> Promote as Ad</label>
+                        
+                        {% elif content_type == 'workshops' %}
+                            <input type="text" name="name" value="{{ item.name if item.name != 'N/A' else '' }}" placeholder="Workshop Name" required>
+                            <input type="url" name="official_link" value="{{ item.official_link if item.official_link != 'N/A' else '' }}" placeholder="Registration Link" required>
+                            <select name="price" required>
+                                <option value="free" {% if item.price == 'free' %}selected{% endif %}>Free</option>
+                                <option value="paid" {% if item.price == 'paid' %}selected{% endif %}>Paid</option>
+                            </select>
+                            <input type="number" name="price_amount" value="{{ item.price_amount if item.price_amount and item.price_amount != 'N/A' else '' }}" placeholder="Price Amount (if paid)">
+                            <input type="text" name="location" value="{{ item.location if item.location != 'N/A' else '' }}" placeholder="Location (online/city)" required>
+                            <label><input type="checkbox" name="certification" {% if item.certification %}checked{% endif %}> Provides Certification</label>
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="promote_as_ad" {% if item.has_ad %}checked{% endif %}> Promote as Ad</label>
+                        
+                        {% elif content_type == 'courses' %}
+                            <input type="text" name="name" value="{{ item.name if item.name != 'N/A' else '' }}" placeholder="Course Name" required>
+                            <input type="url" name="official_link" value="{{ item.official_link if item.official_link != 'N/A' else '' }}" placeholder="Registration Link" required>
+                            <select name="price" required>
+                                <option value="free" {% if item.price == 'free' %}selected{% endif %}>Free</option>
+                                <option value="paid" {% if item.price == 'paid' %}selected{% endif %}>Paid</option>
+                            </select>
+                            <input type="number" name="price_amount" value="{{ item.price_amount if item.price_amount and item.price_amount != 'N/A' else '' }}" placeholder="Price Amount (if paid)">
+                            <label><input type="checkbox" name="certification" {% if item.certification %}checked{% endif %}> Provides Certification</label>
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="promote_as_ad" {% if item.has_ad %}checked{% endif %}> Promote as Ad</label>
+                        
+                        {% elif content_type == 'hackathons' %}
+                            <input type="text" name="name" value="{{ item.name if item.name != 'N/A' else '' }}" placeholder="Hackathon Name" required>
+                            <input type="url" name="official_link" value="{{ item.official_link if item.official_link != 'N/A' else '' }}" placeholder="Registration Link" required>
+                            <select name="price" required>
+                                <option value="free" {% if item.price == 'free' %}selected{% endif %}>Free</option>
+                                <option value="paid" {% if item.price == 'paid' %}selected{% endif %}>Paid</option>
+                            </select>
+                            <input type="number" name="price_amount" value="{{ item.price_amount if item.price_amount and item.price_amount != 'N/A' else '' }}" placeholder="Price Amount (if paid)">
+                            <input type="text" name="location" value="{{ item.location if item.location != 'N/A' else '' }}" placeholder="Location (online/city)" required>
+                            <input type="text" name="prize_pool" value="{{ item.prize_pool if item.prize_pool and item.prize_pool != 'N/A' else '' }}" placeholder="Prize Pool">
+                            <input type="text" name="team_size" value="{{ item.team_size if item.team_size and item.team_size != 'N/A' else '' }}" placeholder="Team Size (e.g., 2-4 members)">
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="promote_as_ad" {% if item.has_ad %}checked{% endif %}> Promote as Ad</label>
+                        
+                        {% elif content_type == 'roadmaps' %}
+                            <input type="text" name="title" value="{{ item.title if item.title != 'N/A' else '' }}" placeholder="Roadmap Title" required>
+                            <input type="text" name="domain" value="{{ item.domain if item.domain and item.domain != 'N/A' else '' }}" placeholder="Domain" required>
+                            <input type="url" name="roadmap_link" value="{{ item.roadmap_link if item.roadmap_link != 'N/A' else '' }}" placeholder="Roadmap Link" required>
+                            <textarea name="description" placeholder="Description">{{ item.description if item.description and item.description != 'N/A' else '' }}</textarea>
+                            <select name="difficulty">
+                                <option value="beginner" {% if item.difficulty == 'beginner' %}selected{% endif %}>Beginner</option>
+                                <option value="intermediate" {% if item.difficulty == 'intermediate' %}selected{% endif %}>Intermediate</option>
+                                <option value="advanced" {% if item.difficulty == 'advanced' %}selected{% endif %}>Advanced</option>
+                            </select>
+                        
+                        {% elif content_type == 'websites' %}
+                            <input type="text" name="name" value="{{ item.name if item.name != 'N/A' else '' }}" placeholder="Website Name" required>
+                            <input type="url" name="link" value="{{ item.link if item.link != 'N/A' else '' }}" placeholder="Website URL" required>
+                            <textarea name="description" placeholder="Description">{{ item.description if item.description and item.description != 'N/A' else '' }}</textarea>
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="is_project" {% if item.is_project %}checked{% endif %}> Our Project</label>
+                        
+                        {% elif content_type == 'ads' %}
+                            <input type="text" name="title" value="{{ item.title if item.title != 'N/A' else '' }}" placeholder="Ad Title" required>
+                            <select name="ad_type" required>
+                                <option value="product" {% if item.ad_type == 'product' %}selected{% endif %}>Product</option>
+                                <option value="sponsored_content" {% if item.ad_type == 'sponsored_content' %}selected{% endif %}>Sponsored Content</option>
+                            </select>
+                            <input type="url" name="link" value="{{ item.link if item.link != 'N/A' else '' }}" placeholder="Ad Link" required>
+                            <select name="position">
+                                <option value="popup" {% if item.position == 'popup' %}selected{% endif %}>Popup</option>
+                                <option value="corner" {% if item.position == 'corner' %}selected{% endif %}>Corner</option>
+                                <option value="inline" {% if item.position == 'inline' %}selected{% endif %}>Inline</option>
+                            </select>
+                            <input type="file" name="image" accept="image/*">
+                            {% if item.image and item.image != 'N/A' %}
+                                <img src="{{ item.image }}" alt="Current Image" style="max-width: 200px;">
+                            {% endif %}
+                            <label><input type="checkbox" name="active" {% if item.active %}checked{% endif %}> Active</label>
+                        {% endif %}
+                        
+                        <button type="submit" class="btn-primary">Update {{ content_type|title }}</button>
+                        <a href="{{ url_for('admin_content', content_type=content_type) }}" class="btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% include 'partials/footer.html' %}
+    
+    <script>
+        function showAddForm() {
+            document.getElementById('addForm').style.display = 'block';
+        }
+        
+        function hideAddForm() {
+            document.getElementById('addForm').style.display = 'none';
+        }
+
+        // Active link highlighting for admin nav
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.admin-nav .nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

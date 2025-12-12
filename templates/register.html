@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Community Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Register Container */
+        .register-container {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease;
+            margin: auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Register Box */
+        .register-box {
+            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+                        0 0 1px rgba(255, 255, 255, 0.1) inset;
+            backdrop-filter: blur(10px);
+        }
+
+        .register-box h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 32px;
+            text-align: center;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: rgba(46, 125, 50, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #81c784;
+        }
+
+        .alert-error,
+        .alert-danger {
+            background: rgba(198, 40, 40, 0.15);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            color: #e57373;
+        }
+
+        .alert-warning {
+            background: rgba(245, 124, 0, 0.15);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            color: #ffb74d;
+        }
+
+        .alert-info {
+            background: rgba(2, 136, 209, 0.15);
+            border: 1px solid rgba(3, 169, 244, 0.3);
+            color: #64b5f6;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #b0b0b0;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input {
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #666666;
+        }
+
+        .form-group input:focus {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.03);
+        }
+
+        .form-group input:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group small {
+            font-size: 12px;
+            color: #666666;
+            margin-top: -4px;
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #333333, #222222);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Register Footer */
+        .register-footer {
+            margin-top: 32px;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .register-footer p {
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .register-footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .register-footer a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #666, #999);
+            transition: width 0.3s ease;
+        }
+
+        .register-footer a:hover {
+            color: #ffffff;
+        }
+
+        .register-footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Form Grid for Better Layout */
+        @media (min-width: 769px) {
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 20px;
+            }
+
+            .register-container {
+                max-width: 480px;
+            }
+
+            .register-box {
+                padding: 40px 32px;
+            }
+
+            .register-box h1 {
+                font-size: 28px;
+                margin-bottom: 28px;
+            }
+
+            form {
+                gap: 18px;
+            }
+
+            .form-group input {
+                padding: 13px 15px;
+                font-size: 14px;
+            }
+
+            .btn-primary {
+                padding: 13px 22px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .register-box {
+                padding: 32px 24px;
+                border-radius: 14px;
+            }
+
+            .register-box h1 {
+                font-size: 26px;
+                margin-bottom: 24px;
+            }
+
+            form {
+                gap: 16px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            .form-group small {
+                font-size: 11px;
+            }
+
+            .btn-primary {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+
+            .register-footer {
+                margin-top: 28px;
+                padding-top: 20px;
+            }
+
+            .register-footer p {
+                font-size: 13px;
+            }
+
+            .alert {
+                padding: 12px 16px;
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .register-box {
+                padding: 28px 20px;
+            }
+
+            .register-box h1 {
+                font-size: 24px;
+            }
+
+            .form-group input {
+                padding: 11px 13px;
+                font-size: 13px;
+            }
+
+            .btn-primary {
+                padding: 11px 18px;
+                font-size: 14px;
+            }
+        }
+
+        /* Loading State */
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Focus Visible for Accessibility */
+        *:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        /* Password Strength Indicator (Optional Enhancement) */
+        .password-strength {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #e57373, #81c784);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <h1>Create Account</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required autocomplete="name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
+                    <small>Minimum 6 characters</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="college">College / Organization</label>
+                    <input type="text" id="college" name="college" required autocomplete="organization">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel">
+                </div>
+                
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            
+            <div class="register-footer">
+                <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

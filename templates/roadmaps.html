@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmaps - Community Platform</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #000000;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 72px;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Enhanced Page Header */
+    .page-header {
+        text-align: center;
+        padding: 80px 24px 60px;
+        background: radial-gradient(ellipse at center top, rgba(40, 40, 40, 0.4) 0%, transparent 70%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    .page-header h1 {
+        font-size: 52px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+        letter-spacing: -1.2px;
+        line-height: 1.1;
+    }
+
+    .page-header p {
+        font-size: 18px;
+        color: #888888;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    /* Refined Filters Section */
+    .filters-section {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 32px;
+        margin: 0 24px 48px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+    }
+
+    .filters-section h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filters-section h3::before {
+        content: "⚡";
+        font-size: 18px;
+    }
+
+    .filters-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-group label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #b0b0b0;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-input, #search-input {
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 15px;
+        outline: none;
+        transition: all 0.3s ease;
+        cursor: text;
+    }
+
+    .filter-input:hover, #search-input:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-1px);
+    }
+
+    .filter-input:focus, #search-input:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    }
+
+    #search-input::placeholder {
+        color: #666666;
+    }
+
+    /* Enhanced Buttons */
+    .btn-primary, .btn-secondary {
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        letter-spacing: 0.3px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #333333, #222222);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+    }
+
+    /* Enhanced Content Grid */
+    .content-section {
+        padding: 0 24px 80px;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 28px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Refined Content Cards */
+    .content-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .content-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    .content-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-content {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .card-header h3 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.3px;
+        flex: 1;
+        line-height: 1.3;
+    }
+
+    /* Enhanced Badges */
+    .difficulty-badge {
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: capitalize;
+        white-space: nowrap;
+        letter-spacing: 0.5px;
+    }
+
+    .difficulty-beginner {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .difficulty-intermediate {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .difficulty-advanced {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Card Meta & Details */
+    .card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #888888;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
+    .icon-tag::before {
+        content: "🏷️";
+        font-size: 14px;
+    }
+
+    .card-description {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #b0b0b0;
+    }
+
+    /* Card Footer */
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: auto;
+    }
+
+    .time-ago {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    /* Enhanced Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 100px 24px;
+        grid-column: 1 / -1;
+    }
+
+    .empty-state h3 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+    }
+
+    .empty-state p {
+        font-size: 16px;
+        color: #888888;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .icon-empty::before, .icon-search::before {
+        content: "📭";
+        font-size: 72px;
+        display: block;
+        margin-bottom: 24px;
+        opacity: 0.7;
+    }
+
+    .icon-search::before {
+        content: "🔍";
+    }
+
+    /* Enhanced Modal */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+        position: relative;
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 28px 28px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-header h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .modal-close {
+        background: transparent;
+        border: none;
+        color: #888888;
+        font-size: 32px;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+        border-radius: 6px;
+    }
+
+    .modal-close:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-body {
+        padding: 28px;
+    }
+
+    .modal-body p {
+        font-size: 15px;
+        color: #b0b0b0;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    .roadmap-title {
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin: 12px 0;
+    }
+
+    .roadmap-warning {
+        color: #fbbf24;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .roadmap-warning::before {
+        content: "⚠️";
+    }
+
+    .modal-footer {
+        display: flex;
+        gap: 12px;
+        padding: 20px 28px 28px;
+        justify-content: flex-end;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .content-grid {
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding-top: 68px;
+        }
+
+        .page-header {
+            padding: 60px 20px 40px;
+        }
+
+        .page-header h1 {
+            font-size: 40px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+        }
+
+        .filters-section {
+            padding: 24px;
+            margin: 0 20px 40px;
+        }
+
+        .filters-wrapper {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .content-section {
+            padding: 0 20px 60px;
+        }
+
+        .content-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding-top: 64px;
+        }
+
+        .page-header {
+            padding: 50px 16px 32px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+        }
+
+        .page-header p {
+            font-size: 15px;
+        }
+
+        .filters-section {
+            padding: 20px;
+            margin: 0 16px 32px;
+            border-radius: 16px;
+        }
+
+        .content-section {
+            padding: 0 16px 60px;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-header h3 {
+            font-size: 20px;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+
+        .modal-content {
+            margin: 0 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        body {
+            padding-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+        }
+
+        .filters-section {
+            padding: 16px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <main class="roadmaps-page">
+        <section class="page-header">
+            <div class="container">
+                <h1>Learning Roadmaps</h1>
+                <p>Follow structured paths to master your desired skills</p>
+            </div>
+        </section>
+
+        <section class="filters-section">
+            <div class="container">
+                <h3>Find Your Path</h3>
+                <div class="filters-wrapper">
+                    <div class="filter-group">
+                        <label for="search-input">Search Roadmaps</label>
+                        <input type="text" id="search-input" class="filter-input" placeholder="Search by title...">
+                    </div>
+
+                    <button id="reset-filters" class="btn-secondary">
+                        <span>Reset Filters</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-grid" id="roadmaps-grid">
+                    {% if roadmaps %}
+                        {% for roadmap in roadmaps %}
+                        <div class="content-card roadmap-card" data-domain="{{ roadmap.domain }}" data-difficulty="{{ roadmap.difficulty }}">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <h3>{{ roadmap.title }}</h3>
+                                    <span class="difficulty-badge difficulty-{{ roadmap.difficulty }}">
+                                        {{ roadmap.difficulty|capitalize }}
+                                    </span>
+                                </div>
+
+                                <div class="card-meta">
+                                    <span class="meta-item">
+                                        <i class="icon-tag"></i>
+                                        {{ roadmap.domain }}
+                                    </span>
+                                </div>
+
+                                {% if roadmap.description %}
+                                <p class="card-description">{{ roadmap.description }}</p>
+                                {% endif %}
+
+                                <div class="card-footer">
+                                    <button class="btn-primary" onclick="openRoadmapModal('{{ roadmap.roadmap_link }}', '{{ roadmap.title }}')">
+                                        View Roadmap
+                                    </button>
+                                    <span class="time-ago">Updated recently</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="icon-empty"></i>
+                            <h3>No Roadmaps Available</h3>
+                            <p>Check back later for new roadmaps</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div id="no-results" class="empty-state" style="display: none;">
+                    <i class="icon-search"></i>
+                    <h3>No Results Found</h3>
+                    <p>Try adjusting your search or filters</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Roadmap Confirmation Modal -->
+    <div id="roadmap-modal" class="modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeRoadmapModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>External Roadmap</h2>
+                <button class="modal-close" onclick="closeRoadmapModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to be redirected to an external roadmap:</p>
+                <p class="roadmap-title" id="modal-roadmap-title"></p>
+                <p class="roadmap-warning">This will open in a new tab. Continue?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeRoadmapModal()">Cancel</button>
+                <button class="btn-primary" id="confirm-roadmap-btn">Yes, Continue</button>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const resetBtn = document.getElementById('reset-filters');
+            const roadmapsGrid = document.getElementById('roadmaps-grid');
+            const noResults = document.getElementById('no-results');
+            const cards = document.querySelectorAll('.roadmap-card');
+
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const domain = card.getAttribute('data-domain').toLowerCase();
+                    
+                    const searchMatch = !searchTerm || 
+                        title.includes(searchTerm) || 
+                        domain.includes(searchTerm);
+
+                    if (searchMatch) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    roadmapsGrid.style.display = 'none';
+                    noResults.style.display = 'block';
+                } else {
+                    roadmapsGrid.style.display = 'grid';
+                    noResults.style.display = 'none';
+                }
+            }
+
+            searchInput.addEventListener('input', applyFilters);
+
+            resetBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                cards.forEach(card => card.style.display = 'block');
+                roadmapsGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+            });
+        });
+
+        // Roadmap modal functionality
+        let currentRoadmapLink = '';
+
+        function openRoadmapModal(link, title) {
+            currentRoadmapLink = link;
+            document.getElementById('modal-roadmap-title').textContent = title;
+            document.getElementById('roadmap-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRoadmapModal() {
+            document.getElementById('roadmap-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentRoadmapLink = '';
+        }
+
+        document.getElementById('confirm-roadmap-btn').addEventListener('click', function() {
+            if (currentRoadmapLink) {
+                window.open(currentRoadmapLink, '_blank');
+                closeRoadmapModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeRoadmapModal();
+            }
+        });
+    </script>
+<!-- Ad Popup -->
+<div class="ad-popup" id="ad-popup" style="display: none;">
+    <div class="ad-popup-overlay" onclick="closeAdPopup()"></div>
+    <div class="ad-popup-content">
+        <button class="ad-popup-close" onclick="closeAdPopup()" aria-label="Close ad">
+            <span style="font-size: 28px; color: #e0e0e0; line-height: 1;">×</span>
+        </button>
+        
+        <div class="ad-popup-body">
+            <div class="ad-popup-image">
+                <img id="ad-popup-img" src="" alt="Advertisement">
+            </div>
+            <div class="ad-popup-info">
+                <h3 id="ad-popup-title"></h3>
+                <p id="ad-popup-description"></p>
+                <a href="#" id="ad-popup-link" class="btn-primary" target="_blank" onclick="trackAdClick()">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Corner Ad -->
+<div class="corner-ad" id="corner-ad" style="display: none;">
+    <button class="corner-ad-close" onclick="closeCornerAd()" aria-label="Close ad">
+        <span style="font-size: 24px; color: #e0e0e0; line-height: 1;">×</span>
+    </button>
+    <a href="#" id="corner-ad-link" target="_blank" onclick="trackCornerAdClick()">
+        <img id="corner-ad-img" src="" alt="Advertisement">
+    </a>
+</div>
+
+<style>
+/* Ad Popup Styles */
+.ad-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ad-popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.ad-popup-content {
+    position: relative;
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ad-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.ad-popup-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(90deg);
+}
+
+.ad-popup-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 85vh;
+}
+
+.ad-popup-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #0a0a0a;
+    position: relative;
+}
+
+.ad-popup-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #1a1a1a, transparent);
+}
+
+.ad-popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ad-popup-info {
+    padding: 32px 28px;
+}
+
+.ad-popup-info h3 {
+    margin: 0 0 16px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.ad-popup-info p {
+    margin: 0 0 24px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+/* Corner Ad Styles */
+.corner-ad {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 280px;
+    max-width: calc(100vw - 48px);
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+    animation: slideInCorner 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInCorner {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.corner-ad-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.corner-ad-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotate(90deg);
+}
+
+.corner-ad a {
+    display: block;
+}
+
+.corner-ad img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.corner-ad:hover img {
+    transform: scale(1.03);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .corner-ad {
+        width: 260px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .corner-ad img {
+        max-height: 350px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .ad-popup-content {
+        width: 95%;
+        max-width: 500px;
+    }
+    
+    .ad-popup-image {
+        height: 220px;
+    }
+    
+    .ad-popup-info {
+        padding: 24px 20px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 22px;
+    }
+    
+    .corner-ad {
+        width: 240px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .corner-ad img {
+        max-height: 300px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .ad-popup-content {
+        width: 96%;
+        max-width: 400px;
+    }
+    
+    .ad-popup-image {
+        height: 180px;
+    }
+    
+    .ad-popup-info {
+        padding: 20px 16px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 20px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 14px;
+    }
+    
+    .corner-ad {
+        width: 200px;
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    .corner-ad img {
+        max-height: 250px;
+    }
+    
+    .corner-ad-close {
+        width: 28px;
+        height: 28px;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+    .ad-popup-content {
+        width: 98%;
+    }
+    
+    .ad-popup-image {
+        height: 160px;
+    }
+    
+    .ad-popup-info {
+        padding: 16px 12px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+    
+    .corner-ad {
+        width: 180px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 220px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .corner-ad {
+        width: 200px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 200px;
+    }
+}
+</style>
+
+<script>
+let currentAdId = null;
+let cornerAdId = null;
+let popupShown = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch and display ads
+    fetchAds();
+    
+    // Show popup ad after 5 seconds
+    setTimeout(function() {
+        if (!popupShown && !sessionStorage.getItem('ad_popup_shown')) {
+            showPopupAd();
+            sessionStorage.setItem('ad_popup_shown', 'true');
+        }
+    }, 5000);
+});
+
+function fetchAds() {
+    fetch('/api/get-ads')
+        .then(response => response.json())
+        .then(ads => {
+            console.log('Ads fetched:', ads); // Debug
+            if (ads && ads.length > 0) {
+                // Show popup ad (first ad)
+                if (ads[0]) {
+                    setupPopupAd(ads[0]);
+                }
+                
+                // Show corner ad (second ad if available)
+                if (ads[1]) {
+                    setupCornerAd(ads[1]);
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching ads:', error));
+}
+
+function setupPopupAd(ad) {
+    currentAdId = ad._id;
+    document.getElementById('ad-popup-img').src = ad.image || '';
+    document.getElementById('ad-popup-title').textContent = ad.title || '';
+    document.getElementById('ad-popup-description').textContent = ad.description || '';
+    document.getElementById('ad-popup-link').href = ad.link || '#';
+    
+    // Track impression
+    trackAdImpression(ad._id);
+}
+
+function setupCornerAd(ad) {
+    cornerAdId = ad._id;
+    document.getElementById('corner-ad-img').src = ad.image || '';
+    document.getElementById('corner-ad-link').href = ad.link || '#';
+    
+    // Show corner ad after 10 seconds
+    setTimeout(function() {
+        document.getElementById('corner-ad').style.display = 'block';
+        trackAdImpression(ad._id);
+    }, 10000);
+}
+
+function showPopupAd() {
+    const popup = document.getElementById('ad-popup');
+    if (popup && currentAdId) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        popupShown = true;
+    }
+}
+
+function closeAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function closeCornerAd() {
+    document.getElementById('corner-ad').style.display = 'none';
+}
+
+function trackAdClick() {
+    if (currentAdId) {
+        fetch(`/ad/click/${currentAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackCornerAdClick() {
+    if (cornerAdId) {
+        fetch(`/ad/click/${cornerAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Corner ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackAdImpression(adId) {
+    fetch(`/ad/impression/${adId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(() => console.log('Impression tracked'))
+      .catch(error => console.error('Error tracking impression:', error));
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeAdPopup();
+    }
+});
+</script>
+
+</body>
+</html>
+
+

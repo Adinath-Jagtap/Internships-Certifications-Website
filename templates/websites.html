@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites - Community Platform</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #000000;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 72px;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Page Header */
+    .page-header,
+    .websites-page .page-header .container {
+        text-align: center;
+        padding: 64px 24px 48px;
+    }
+
+    .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ffffff, #666666);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+        letter-spacing: -1.5px;
+    }
+
+    .page-header p {
+        font-size: 18px;
+        color: #888888;
+    }
+
+    /* Filters Section */
+    .filters-section {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 32px;
+        margin: 0 24px 48px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .filters-section h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    .filters-wrapper,
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filter-group label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #b0b0b0;
+    }
+
+    .filter-select,
+    .filter-input,
+    #searchInput,
+    select,
+    input[type="text"] {
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    .filter-select:hover,
+    select:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .filter-select:focus,
+    .filter-input:focus,
+    #searchInput:focus,
+    select:focus,
+    input[type="text"]:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .filter-select option,
+    select option {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .filter-input::placeholder,
+    #searchInput::placeholder,
+    input[type="text"]::placeholder {
+        color: #666666;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #333333, #222222);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary,
+    .btn-outline {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover,
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Content Section */
+    .content-section {
+        padding: 0 24px 80px;
+    }
+
+    .content-grid,
+    .workshops-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Cards */
+    .content-card,
+    .website-card,
+    .workshop-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-card:hover,
+    .website-card:hover,
+    .workshop-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Card Image */
+    .card-image {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .card-image img,
+    .workshop-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .card-image:hover img {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .card-image:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .overlay-btn {
+        padding: 12px 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .overlay-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .workshop-image {
+        height: 200px;
+    }
+
+    /* Card Content */
+    .card-content,
+    .workshop-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .card-header h3,
+    .workshop-content h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.3px;
+        flex: 1;
+    }
+
+    /* Badges */
+    .category-badge,
+    .badge {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-free {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+        border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-paid {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .badge-cert {
+        background: rgba(168, 85, 247, 0.15);
+        color: #c084fc;
+        border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .card-description,
+    .workshop-description {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #b0b0b0;
+    }
+
+    /* Card Meta & Workshop Info */
+    .card-meta,
+    .workshop-details,
+    .workshop-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .workshop-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .workshop-info p {
+        font-size: 14px;
+        color: #b0b0b0;
+    }
+
+    .workshop-info strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .workshop-info .price {
+        color: #4ade80;
+        font-weight: 700;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #888888;
+    }
+
+    .icon-user::before {
+        content: "👤";
+        font-size: 14px;
+    }
+
+    .icon-code::before {
+        content: "💻";
+        font-size: 14px;
+    }
+
+    .icon-github::before {
+        content: "🔗";
+        font-size: 14px;
+    }
+
+    .icon-external::before {
+        content: "🚀";
+        font-size: 14px;
+    }
+
+    /* Card Footer */
+    .card-footer,
+    .workshop-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: auto;
+        flex-wrap: wrap;
+    }
+
+    .time-ago {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 80px 24px;
+        grid-column: 1 / -1;
+    }
+
+    .empty-state h2,
+    .empty-state h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+    }
+
+    .empty-state p {
+        font-size: 16px;
+        color: #888888;
+    }
+
+    .icon-empty::before,
+    .icon-search::before {
+        content: "📭";
+        font-size: 64px;
+        display: block;
+        margin-bottom: 24px;
+    }
+
+    .icon-search::before {
+        content: "🔍";
+    }
+
+    /* Workshops Container */
+    .workshops-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .content-grid,
+        .workshops-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding-top: 68px;
+        }
+
+        .page-header,
+        .websites-page .page-header .container {
+            padding: 48px 20px 32px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+        }
+
+        .filters-section {
+            padding: 24px;
+            margin: 0 20px 40px;
+        }
+
+        .content-section {
+            padding: 0 20px 80px;
+        }
+
+        .content-grid,
+        .workshops-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card-footer {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .card-footer .btn-primary,
+        .card-footer .btn-outline {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding-top: 64px;
+        }
+
+        .page-header,
+        .websites-page .page-header .container {
+            padding: 40px 16px 24px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+        }
+
+        .filters-section {
+            padding: 20px;
+            margin: 0 16px 32px;
+        }
+
+        .filters-section h3 {
+            font-size: 18px;
+        }
+
+        .content-section {
+            padding: 0 16px 80px;
+        }
+
+        .card-content,
+        .workshop-content {
+            padding: 20px;
+        }
+
+        .card-header h3,
+        .workshop-content h3 {
+            font-size: 18px;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-outline {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        .card-image {
+            height: 180px;
+        }
+
+        .workshop-image {
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        body {
+            padding-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .filters-section {
+            padding: 16px;
+        }
+
+        .card-content,
+        .workshop-content {
+            padding: 16px;
+        }
+
+        .card-image {
+            height: 160px;
+        }
+    }
+</style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <main class="websites-page">
+        <section class="page-header">
+            <div class="container">
+                <h1>Static Websites</h1>
+                <p>Explore amazing static websites and templates hosted on GitHub Pages</p>
+            </div>
+        </section>
+
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-wrapper">
+                    <div class="filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="Portfolio">Portfolio</option>
+                            <option value="Landing Page">Landing Page</option>
+                            <option value="Blog">Blog</option>
+                            <option value="Documentation">Documentation</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Agency">Agency</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="search-input">Search</label>
+                        <input type="text" id="search-input" class="filter-input" placeholder="Search websites...">
+                    </div>
+
+                    <button id="reset-filters" class="btn-secondary">Reset Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-grid" id="websites-grid">
+                    {% if websites %}
+                        {% for website in websites %}
+                        <div class="content-card website-card" data-category="{{ website.category }}" data-title="{{ website.title|lower }}" data-description="{{ website.description|lower if website.description else '' }}">
+                            {% if website.image %}
+                            <div class="card-image">
+                                <img src="{{ website.image }}" alt="{{ website.title }}">
+                                <div class="image-overlay">
+                                    <a href="{{ website.github_link }}" target="_blank" class="overlay-btn">
+                                        <i class="icon-github"></i> View on GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <h3>{{ website.title }}</h3>
+                                    {% if website.category %}
+                                    <span class="category-badge">{{ website.category }}</span>
+                                    {% endif %}
+                                </div>
+
+                                {% if website.description %}
+                                <p class="card-description">{{ website.description }}</p>
+                                {% endif %}
+
+                                <div class="card-meta">
+                                    {% if website.author %}
+                                    <span class="meta-item">
+                                        <i class="icon-user"></i>
+                                        {{ website.author }}
+                                    </span>
+                                    {% endif %}
+                                    {% if website.tech_stack %}
+                                    <span class="meta-item">
+                                        <i class="icon-code"></i>
+                                        {{ website.tech_stack }}
+                                    </span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="card-footer">
+                                    {% if website.live_link %}
+                                    <a href="{{ website.live_link }}" target="_blank" class="btn-primary">
+                                        <i class="icon-external"></i> Live Demo
+                                    </a>
+                                    {% endif %}
+                                    {% if website.github_link %}
+                                    <a href="{{ website.github_link }}" target="_blank" class="btn-outline">
+                                        <i class="icon-github"></i> GitHub
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="icon-empty"></i>
+                            <h3>No Websites Available</h3>
+                            <p>Check back later for new websites</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div id="no-results" class="empty-state" style="display: none;">
+                    <i class="icon-search"></i>
+                    <h3>No Results Found</h3>
+                    <p>Try adjusting your filters or search terms</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'partials/footer.html' %}
+
+    <script>
+        // Filter and search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilter = document.getElementById('category-filter');
+            const searchInput = document.getElementById('search-input');
+            const resetBtn = document.getElementById('reset-filters');
+            const websitesGrid = document.getElementById('websites-grid');
+            const noResults = document.getElementById('no-results');
+            const cards = document.querySelectorAll('.website-card');
+
+            function applyFilters() {
+                const category = categoryFilter.value.toLowerCase();
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category').toLowerCase();
+                    const cardTitle = card.getAttribute('data-title');
+                    const cardDescription = card.getAttribute('data-description');
+
+                    const categoryMatch = !category || cardCategory === category;
+                    const searchMatch = !searchTerm || 
+                                      cardTitle.includes(searchTerm) || 
+                                      cardDescription.includes(searchTerm);
+
+                    if (categoryMatch && searchMatch) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    websitesGrid.style.display = 'none';
+                    noResults.style.display = 'block';
+                } else {
+                    websitesGrid.style.display = 'grid';
+                    noResults.style.display = 'none';
+                }
+            }
+
+            categoryFilter.addEventListener('change', applyFilters);
+            searchInput.addEventListener('input', applyFilters);
+
+            resetBtn.addEventListener('click', function() {
+                categoryFilter.value = '';
+                searchInput.value = '';
+                cards.forEach(card => card.style.display = 'block');
+                websitesGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
