@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import os
 import re
 from functools import wraps, lru_cache
+import numpy as np
 
 # Load environment variables
 load_dotenv()
@@ -1013,3 +1014,4 @@ def add_header(response):
 if __name__ == '__main__':
 
     app.run(debug=True, host='0.0.0.0', port=5000)
+
