@@ -1,7 +1,6 @@
 # 🚀 Syntax Syndicate
 > **Archive of internships and certifications of our growing community**
 
-
 <div align="center">
 
 ![Syntax Syndicate](https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=32&duration=2500&pause=1000&color=FF6B6B&background=FFFFFF00&center=true&vCenter=true&width=700&lines=✨+SYNTAX+SYNDICATE+✨;🚀+Career+Growth+Hub+🚀;💼+Internships+%26+Certifications+💼;🎯+Your+Success+Starts+Here+🎯)
