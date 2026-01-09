@@ -13,7 +13,6 @@
 [![Fresh Opportunities](https://img.shields.io/badge/⚡%20Fresh-Opportunities%20Daily-6BCF7F?style=for-the-badge&logo=trophy&logoColor=white&labelColor=4CAF50)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="100" style="max-width: 100px;">
-
 </div>
 
 ---
