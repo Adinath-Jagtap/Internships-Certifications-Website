@@ -15,7 +15,6 @@ from dotenv import load_dotenv
 import os
 import re
 from functools import wraps, lru_cache
-import numpy as np
 
 # Load environment variables
 load_dotenv()
@@ -225,8 +224,11 @@ def login():
             session['username'] = user['name']
             flash('Login successful!', 'success')
             
-            next_page = request.args.get('next')
-            return redirect(next_page if next_page else url_for('user_dashboard'))
+            # Get the next parameter from either POST form or GET query string
+            next_page = request.form.get('next') or request.args.get('next')
+            if next_page:
+                return redirect(next_page)
+            return redirect(url_for('user_dashboard'))
         
         flash('Invalid email or password', 'danger')
     
@@ -280,6 +282,11 @@ def register():
         session['username'] = name
         
         flash('Registration successful!', 'success')
+        
+        # Get the next parameter from either POST form or GET query string
+        next_page = request.form.get('next') or request.args.get('next')
+        if next_page:
+            return redirect(next_page)
         return redirect(url_for('user_dashboard'))
     
     return render_template('register.html')
@@ -1012,6 +1019,4 @@ def add_header(response):
     return response
 
 if __name__ == '__main__':
-
     app.run(debug=True, host='0.0.0.0', port=5000)
-
