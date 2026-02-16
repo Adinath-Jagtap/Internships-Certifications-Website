@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshops - Community Platform</title>
+    <meta property="og:title" content="Workshops - Community Platform">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #000000;
+        color: #e0e0e0;
+        min-height: 100vh;
+        padding-top: 72px;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Page Header */
+    .page-header,
+    .websites-page .page-header .container {
+        text-align: center;
+        padding: 64px 24px 48px;
+    }
+
+    .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ffffff, #666666);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+        letter-spacing: -1.5px;
+    }
+
+    .page-header p {
+        font-size: 18px;
+        color: #888888;
+    }
+
+    /* Filters Section */
+    .filters-section {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 32px;
+        margin: 0 24px 48px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .filters-section h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    .filters-wrapper,
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filter-group label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #b0b0b0;
+    }
+
+    .filter-select,
+    .filter-input,
+    #searchInput,
+    select,
+    input[type="text"] {
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    .filter-select:hover,
+    select:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .filter-select:focus,
+    .filter-input:focus,
+    #searchInput:focus,
+    select:focus,
+    input[type="text"]:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .filter-select option,
+    select option {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .filter-input::placeholder,
+    #searchInput::placeholder,
+    input[type="text"]::placeholder {
+        color: #666666;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #333333, #222222);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary,
+    .btn-outline {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover,
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Content Section */
+    .content-section {
+        padding: 0 24px 80px;
+    }
+
+    .content-grid,
+    .workshops-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Cards */
+    .content-card,
+    .website-card,
+    .workshop-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-card:hover,
+    .website-card:hover,
+    .workshop-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Card Image */
+    .card-image {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .card-image img,
+    .workshop-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .card-image:hover img {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .card-image:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .overlay-btn {
+        padding: 12px 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .overlay-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .workshop-image {
+        height: 200px;
+    }
+
+    /* Card Content */
+    .card-content,
+    .workshop-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .card-header h3,
+    .workshop-content h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.3px;
+        flex: 1;
+    }
+
+    /* Badges */
+    .category-badge,
+    .badge {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-free {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+        border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-paid {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .badge-cert {
+        background: rgba(168, 85, 247, 0.15);
+        color: #c084fc;
+        border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .card-description,
+    .workshop-description {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #b0b0b0;
+    }
+
+    /* Card Meta & Workshop Info */
+    .card-meta,
+    .workshop-details,
+    .workshop-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .workshop-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .workshop-info p {
+        font-size: 14px;
+        color: #b0b0b0;
+    }
+
+    .workshop-info strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .workshop-info .price {
+        color: #4ade80;
+        font-weight: 700;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #888888;
+    }
+
+    .icon-user::before {
+        content: "👤";
+        font-size: 14px;
+    }
+
+    .icon-code::before {
+        content: "💻";
+        font-size: 14px;
+    }
+
+    .icon-external::before {
+        content: "🚀";
+        font-size: 14px;
+    }
+
+    /* Card Footer */
+    .card-footer,
+    .workshop-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: auto;
+        flex-wrap: wrap;
+    }
+
+    .time-ago {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 80px 24px;
+        grid-column: 1 / -1;
+    }
+
+    .empty-state h2,
+    .empty-state h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 12px;
+    }
+
+    .empty-state p {
+        font-size: 16px;
+        color: #888888;
+    }
+
+    .icon-empty::before,
+    .icon-search::before {
+        content: "📭";
+        font-size: 64px;
+        display: block;
+        margin-bottom: 24px;
+    }
+
+    .icon-search::before {
+        content: "🔍";
+    }
+
+    /* Workshops Container */
+    .workshops-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .content-grid,
+        .workshops-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding-top: 68px;
+        }
+
+        .page-header,
+        .websites-page .page-header .container {
+            padding: 48px 20px 32px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+        }
+
+        .filters-section {
+            padding: 24px;
+            margin: 0 20px 40px;
+        }
+
+        .content-section {
+            padding: 0 20px 80px;
+        }
+
+        .content-grid,
+        .workshops-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .filters-wrapper,
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card-footer {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .card-footer .btn-primary,
+        .card-footer .btn-outline {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding-top: 64px;
+        }
+
+        .page-header,
+        .websites-page .page-header .container {
+            padding: 40px 16px 24px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+        }
+
+        .filters-section {
+            padding: 20px;
+            margin: 0 16px 32px;
+        }
+
+        .filters-section h3 {
+            font-size: 18px;
+        }
+
+        .content-section {
+            padding: 0 16px 80px;
+        }
+
+        .card-content,
+        .workshop-content {
+            padding: 20px;
+        }
+
+        .card-header h3,
+        .workshop-content h3 {
+            font-size: 18px;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-outline {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        .card-image {
+            height: 180px;
+        }
+
+        .workshop-image {
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        body {
+            padding-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .filters-section {
+            padding: 16px;
+        }
+
+        .card-content,
+        .workshop-content {
+            padding: 16px;
+        }
+
+        .card-image {
+            height: 160px;
+        }
+    }
+</style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    
+    <div class="workshops-container">
+        <div class="page-header">
+            <h1>Workshops</h1>
+            <p>Enhance your skills with hands-on workshops</p>
+        </div>
+        
+        <div class="filters-section">
+            <h3>Filter Workshops</h3>
+                <div class="filters-grid">
+                    <select id="locationFilter" onchange="applyFilters()">
+                        <option value="">All Locations</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                    
+                    <select id="priceFilter" onchange="applyFilters()">
+                        <option value="">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                    
+                    <select id="dateFilter" onchange="applyFilters()">
+                        <option value="">All Time</option>
+                        <option value="24h">Last 24 Hours</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                    
+                    <input type="text" id="searchInput" placeholder="Search workshops..." onkeyup="searchWorkshops()">
+                    
+                    <button onclick="clearFilters()" class="btn-secondary">Clear Filters</button>
+                </div>
+        </div>
+        
+        <div class="workshops-grid" id="workshopsGrid">
+            {% for workshop in workshops %}
+                <div class="workshop-card" data-location="{{ workshop.location }}" data-price="{{ workshop.price }}">
+                    {% if workshop.image and workshop.image != 'N/A' %}
+                        <img src="{{ workshop.image }}" alt="{{ workshop.name }}" class="workshop-image">
+                    {% endif %}
+                    
+                    <div class="workshop-content">
+                        <h3>{{ workshop.name if workshop.name != 'N/A' else 'Workshop' }}</h3>
+                        
+                        <div class="workshop-details">
+                            {% if workshop.price and workshop.price != 'N/A' %}
+                                <span class="badge badge-{{ 'free' if workshop.price == 'free' else 'paid' }}">{{ workshop.price|upper }}</span>
+                            {% endif %}
+                            {% if workshop.certification %}
+                                <span class="badge badge-cert">Certificate</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="workshop-info">
+                            {% if workshop.location and workshop.location != 'N/A' %}
+                                <p><strong>Location:</strong> {{ workshop.location }}</p>
+                            {% endif %}
+                            {% if workshop.price == 'paid' and workshop.price_amount and workshop.price_amount != 'N/A' %}
+                                <p class="price"><strong>Price:</strong> ₹{{ workshop.price_amount }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="workshop-footer">
+                            <span class="time-ago">{{ workshop.time_ago }}</span>
+                            <a href="{{ url_for('detail_page', content_type='workshop', id=workshop._id) }}" class="btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        {% if not workshops %}
+            <div class="empty-state">
+                <h2>No Workshops Available</h2>
+                <p>Check back later for new workshops</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% include 'partials/footer.html' %}
+    
+    <script>
+        function applyFilters() {
+            const domain = document.getElementById('domainFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const price = document.getElementById('priceFilter').value;
+            const date = document.getElementById('dateFilter').value;
+            
+            let url = '/api/filter/workshops?';
+            if (domain) url += `domain=${domain}&`;
+            if (location) url += `location=${location}&`;
+            if (price) url += `price=${price}&`;
+            if (date) url += `date=${date}&`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    updateWorkshopsGrid(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        
+        function searchWorkshops() {
+            const query = document.getElementById('searchInput').value;
+            if (query.length < 2) return;
+            
+            fetch(`/api/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    const workshops = data.filter(item => item.type === 'workshop');
+                    updateWorkshopsGrid(workshops);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        
+        function updateWorkshopsGrid(workshops) {
+            const grid = document.getElementById('workshopsGrid');
+            
+            if (workshops.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><h2>No Results Found</h2><p>Try adjusting your filters</p></div>';
+                return;
+            }
+            
+            grid.innerHTML = workshops.map(workshop => `
+                <div class="workshop-card">
+                    ${workshop.image ? `<img src="${workshop.image}" alt="${workshop.name}" class="workshop-image">` : ''}
+                    <div class="workshop-content">
+                        <h3>${workshop.name}</h3>
+                        <div class="workshop-details">
+                            <span class="badge">${workshop.domain}</span>
+                            <span class="badge badge-${workshop.price}">${workshop.price.toUpperCase()}</span>
+                            ${workshop.certification ? '<span class="badge badge-cert">Certificate</span>' : ''}
+                        </div>
+                        <div class="workshop-info">
+                            <p><strong>Organizer:</strong> ${workshop.organizer}</p>
+                            <p><strong>Location:</strong> ${workshop.location}</p>
+                            ${workshop.duration ? `<p><strong>Duration:</strong> ${workshop.duration}</p>` : ''}
+                            ${workshop.price === 'paid' && workshop.price_amount ? `<p class="price"><strong>Price:</strong> ₹${workshop.price_amount}</p>` : ''}
+                        </div>
+                        <p class="workshop-description">${workshop.description.substring(0, 150)}...</p>
+                        <div class="workshop-footer">
+                            <span class="time-ago">${workshop.time_ago}</span>
+                            <a href="/detail/workshop/${workshop._id}" class="btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function clearFilters() {
+            document.getElementById('domainFilter').value = '';
+            document.getElementById('locationFilter').value = '';
+            document.getElementById('priceFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('searchInput').value = '';
+            location.reload();
+        }
+    </script>
+
+<!-- Ad Popup -->
+<div class="ad-popup" id="ad-popup" style="display: none;">
+    <div class="ad-popup-overlay" onclick="closeAdPopup()"></div>
+    <div class="ad-popup-content">
+        <button class="ad-popup-close" onclick="closeAdPopup()" aria-label="Close ad">
+            <span style="font-size: 28px; color: #e0e0e0; line-height: 1;">×</span>
+        </button>
+        
+        <div class="ad-popup-body">
+            <div class="ad-popup-image">
+                <img id="ad-popup-img" src="" alt="Advertisement">
+            </div>
+            <div class="ad-popup-info">
+                <h3 id="ad-popup-title"></h3>
+                <p id="ad-popup-description"></p>
+                <a href="#" id="ad-popup-link" class="btn-primary" target="_blank" onclick="trackAdClick()">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Corner Ad -->
+<div class="corner-ad" id="corner-ad" style="display: none;">
+    <button class="corner-ad-close" onclick="closeCornerAd()" aria-label="Close ad">
+        <span style="font-size: 24px; color: #e0e0e0; line-height: 1;">×</span>
+    </button>
+    <a href="#" id="corner-ad-link" target="_blank" onclick="trackCornerAdClick()">
+        <img id="corner-ad-img" src="" alt="Advertisement">
+    </a>
+</div>
+
+<style>
+/* Ad Popup Styles */
+.ad-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ad-popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.ad-popup-content {
+    position: relative;
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ad-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.ad-popup-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(90deg);
+}
+
+.ad-popup-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 85vh;
+}
+
+.ad-popup-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #0a0a0a;
+    position: relative;
+}
+
+.ad-popup-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #1a1a1a, transparent);
+}
+
+.ad-popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ad-popup-info {
+    padding: 32px 28px;
+}
+
+.ad-popup-info h3 {
+    margin: 0 0 16px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.ad-popup-info p {
+    margin: 0 0 24px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+/* Corner Ad Styles */
+.corner-ad {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 280px;
+    max-width: calc(100vw - 48px);
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+    animation: slideInCorner 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInCorner {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.corner-ad-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.corner-ad-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotate(90deg);
+}
+
+.corner-ad a {
+    display: block;
+}
+
+.corner-ad img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.corner-ad:hover img {
+    transform: scale(1.03);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .corner-ad {
+        width: 260px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .corner-ad img {
+        max-height: 350px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .ad-popup-content {
+        width: 95%;
+        max-width: 500px;
+    }
+    
+    .ad-popup-image {
+        height: 220px;
+    }
+    
+    .ad-popup-info {
+        padding: 24px 20px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 22px;
+    }
+    
+    .corner-ad {
+        width: 240px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .corner-ad img {
+        max-height: 300px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .ad-popup-content {
+        width: 96%;
+        max-width: 400px;
+    }
+    
+    .ad-popup-image {
+        height: 180px;
+    }
+    
+    .ad-popup-info {
+        padding: 20px 16px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 20px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 14px;
+    }
+    
+    .corner-ad {
+        width: 200px;
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    .corner-ad img {
+        max-height: 250px;
+    }
+    
+    .corner-ad-close {
+        width: 28px;
+        height: 28px;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+    .ad-popup-content {
+        width: 98%;
+    }
+    
+    .ad-popup-image {
+        height: 160px;
+    }
+    
+    .ad-popup-info {
+        padding: 16px 12px;
+    }
+    
+    .ad-popup-info h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .ad-popup-info p {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+    
+    .corner-ad {
+        width: 180px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 220px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .corner-ad {
+        width: 200px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .corner-ad img {
+        max-height: 200px;
+    }
+}
+</style>
+
+<script>
+let currentAdId = null;
+let cornerAdId = null;
+let popupShown = false;
+let cornerAdInterval = null; // Store interval ID for cleanup
+let allAds = []; // Store all fetched ads
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch and display ads
+    fetchAds();
+    
+    // Show popup ad after 5 seconds (ALWAYS on every page load)
+    setTimeout(function() {
+        if (!popupShown) {
+            showPopupAd();
+        }
+    }, 5000);
+});
+
+function fetchAds() {
+    fetch('/api/get-ads')
+        .then(response => response.json())
+        .then(ads => {
+            console.log('Ads fetched:', ads);
+            if (ads && ads.length > 0) {
+                allAds = ads; // Store all ads for rotation
+                
+                // Show popup ad (first ad)
+                if (ads[0]) {
+                    setupPopupAd(ads[0]);
+                }
+                
+                // Show corner ad (second ad if available)
+                if (ads[1]) {
+                    setupCornerAd(ads[1]);
+                }
+                
+                // Start corner ad rotation every 15 seconds
+                startCornerAdRotation();
+            }
+        })
+        .catch(error => console.error('Error fetching ads:', error));
+}
+
+function setupPopupAd(ad) {
+    currentAdId = ad._id;
+    document.getElementById('ad-popup-img').src = ad.image || '';
+    document.getElementById('ad-popup-title').textContent = ad.title || '';
+    document.getElementById('ad-popup-description').textContent = ad.description || '';
+    document.getElementById('ad-popup-link').href = ad.link || '#';
+    
+    // Track impression
+    trackAdImpression(ad._id);
+}
+
+function setupCornerAd(ad) {
+    cornerAdId = ad._id;
+    document.getElementById('corner-ad-img').src = ad.image || '';
+    document.getElementById('corner-ad-link').href = ad.link || '#';
+    
+    // Show corner ad after 10 seconds
+    setTimeout(function() {
+        document.getElementById('corner-ad').style.display = 'block';
+        trackAdImpression(ad._id);
+    }, 10000);
+}
+
+// NEW: Corner ad rotation every 15 seconds
+function startCornerAdRotation() {
+    let currentAdIndex = 1; // Start from second ad (first is popup)
+    
+    // Clear any existing interval
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+    
+    // Rotate corner ad every 15 seconds
+    cornerAdInterval = setInterval(function() {
+        if (allAds && allAds.length > 1) {
+            // Get next ad (cycle through all ads)
+            currentAdIndex = (currentAdIndex + 1) % allAds.length;
+            const nextAd = allAds[currentAdIndex];
+            
+            // Update corner ad
+            cornerAdId = nextAd._id;
+            document.getElementById('corner-ad-img').src = nextAd.image || '';
+            document.getElementById('corner-ad-link').href = nextAd.link || '#';
+            
+            // Track impression for new ad
+            trackAdImpression(nextAd._id);
+            
+            console.log('Corner ad rotated to:', nextAd.title);
+        }
+    }, 15000); // 15 seconds
+}
+
+function showPopupAd() {
+    const popup = document.getElementById('ad-popup');
+    if (popup && currentAdId) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        popupShown = true;
+    }
+}
+
+function closeAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function closeCornerAd() {
+    const cornerAd = document.getElementById('corner-ad');
+    cornerAd.style.display = 'none';
+    
+    // Show corner ad again after 30 seconds (instead of stopping rotation)
+    setTimeout(function() {
+        cornerAd.style.display = 'block';
+    }, 30000);
+}
+
+function trackAdClick() {
+    if (currentAdId) {
+        fetch(`/ad/click/${currentAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackCornerAdClick() {
+    if (cornerAdId) {
+        fetch(`/ad/click/${cornerAdId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => console.log('Corner ad click tracked'))
+          .catch(error => console.error('Error tracking ad click:', error));
+    }
+}
+
+function trackAdImpression(adId) {
+    fetch(`/ad/impression/${adId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(() => console.log('Impression tracked'))
+      .catch(error => console.error('Error tracking impression:', error));
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeAdPopup();
+    }
+});
+
+// Cleanup interval when page unloads
+window.addEventListener('beforeunload', function() {
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+});
+</script>
+
+</body>
+</html>
+
+
