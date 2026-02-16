@@ -1,324 +1,235 @@
-# 🚀 Syntax Syndicate
-> **Archive of internships and certifications of our growing community**
-
-<div align="center"> 
-
-![Syntax Syndicate](https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=32&duration=2500&pause=1000&color=FF6B6B&background=FFFFFF00&center=true&vCenter=true&width=700&lines=✨+SYNTAX+SYNDICATE+✨;🚀+Career+Growth+Hub+🚀;💼+Internships+%26+Certifications+💼;🎯+Your+Success+Starts+Here+🎯)
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" style="max-width: 700px;">
-
-[![Community Members](https://img.shields.io/badge/👥%20Community-100%2B%20Students-FF6B6B?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=25D366)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
-[![LinkedIn Page](https://img.shields.io/badge/💼%20Follow%20on%20LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/syntax-syndicate/)
-[![Growing Fast](https://img.shields.io/badge/🚀-Growing%20Fast-orange?style=for-the-badge)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
-[![Fresh Opportunities](https://img.shields.io/badge/⚡%20Fresh-Opportunities%20Daily-6BCF7F?style=for-the-badge&logo=trophy&logoColor=white&labelColor=4CAF50)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
-
-<img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="100" style="max-width: 100px;">
-</div>
----
-
-## 🎯 Quick Navigation
+# 🚀 Internships & Certifications Hub
 
 <div align="center">
+  
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.3+-black?logo=flask)](https://flask.palletsprojects.com)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6.0-green?logo=mongodb)](https://mongodb.com)
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-Image%20Upload-blue?logo=cloudinary)](https://cloudinary.com)
+[![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?logo=render)](https://render.com)
 
+**A community-driven platform to discover internships, certification courses, workshops, hackathons, and more — all in one place.**  
+Built with Flask and MongoDB, featuring admin controls, image uploads, and ad tracking.
 
-<img src="https://user-images.githubusercontent.com/74038190/212284094-e50ceae2-de86-4dd2-bb56-9bb6bd273674.gif" width="100%" style="max-width: 200px;">
-
-
-<div style="overflow-x: auto;">
-
-| 💼 [Internships & Virtual Internships](#-internships--virtual-internships) | 🏆 [Certification Courses](#-certification-courses) | 📱 [Join Community](#-join-our-whatsapp-community) |
-|:---:|:---:|:---:|
-| **Find Your Dream Role** | **Boost Your Skills** | **Connect & Grow** |
-
-</div>
-
-<img src="https://user-images.githubusercontent.com/74038190/212284094-e50ceae2-de86-4dd2-bb56-9bb6bd273674.gif" width="100%" style="max-width: 200px;">
+🌐 **[Live Demo](https://internships-certifications-website.onrender.com)**  
 
 </div>
 
 ---
 
-## 💼 Internships & Virtual Internships
+## 📚 Table of Contents
 
-<div align="center">
-
-<img src="https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif" width="60%" style="max-width: 300px;">
-
-**✨ All internship opportunities in one place - Updated regularly ✨**
-
-</div>
-
-<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 2px; margin: 10px 0;">
-<div style="background: white; border-radius: 13px; padding: 0; overflow-x: auto;">
-
-<table style="width: 100%; min-width: 600px;">
-<tr>
-<th>🎯 <strong>Title</strong></th>
-<th>🏢 <strong>Company</strong></th>
-<th>🔧 <strong>Sector</strong></th>
-<th>⏰ <strong>Deadline</strong></th>
-<th>📋 <strong>Type</strong></th>
-<th>🚀 <strong>Apply</strong></th>
-</tr>
-<tr>
-<td>🛡️ <strong>Cyber Security Virtual Internship</strong></td>
-<td>Deloitte Australia</td>
-<td>Cybersecurity</td>
-<td>Self-paced</td>
-<td>Virtual</td>
-<td><a href="https://www.theforage.com/simulations/Deloitte%20Australia/cyber-c1e3"><strong>Start Now</strong></a></td>
-</tr>
-<tr>
-<td>💻 <strong>Technology Virtual Internship</strong></td>
-<td>Deloitte Australia</td>
-<td>Technology</td>
-<td>Self-paced</td>
-<td>Virtual</td>
-<td><a href="https://www.theforage.com/simulations/Deloitte%20Australia/technology-fz0w"><strong>Start Now</strong></a></td>
-</tr>
-<tr>
-<td>📊 <strong>Data Analytics Virtual Internship</strong></td>
-<td>Deloitte Australia</td>
-<td>Data Science</td>
-<td>Self-paced</td>
-<td>Virtual</td>
-<td><a href="https://www.theforage.com/simulations/Deloitte%20Australia/data-analytics-s5zy"><strong>Start Now</strong></a></td>
-</tr>
-<tr>
-<td>📈 <strong>Data Visualization Virtual Internship</strong></td>
-<td>Tata</td>
-<td>Data Science</td>
-<td>Self-paced</td>
-<td>Virtual</td>
-<td><a href="https://www.theforage.com/simulations/tata/data-visualisation-p5xo"><strong>Start Now</strong></a></td>
-</tr>
-</table>
-
-</div>
-</div>
-
+- [✨ Features](#-features)
+- [⚙️ Tech Stack](#️-tech-stack)
+- [📦 Requirements](#-requirements)
+- [🚀 Quick Start](#-quick-start)
+- [🔐 Environment Variables](#-environment-variables)
+- [🗄️ Database & Indexes](#️-database--indexes)
+- [📡 API Endpoints](#-api-endpoints)
+- [☁️ Deployment Notes](#️-deployment-notes)
+- [🛡️ Security Checklist](#️-security-checklist)
+- [🎨 Upgrades & Enhancements](#-upgrades--enhancements)
+- [🤝 Contributing](#-contributing)
 
 ---
 
-## 🏆 Certification Courses
+## ✨ Features
 
-<div align="center">
-
-<img src="https://user-images.githubusercontent.com/74038190/216644497-1951db19-8f3d-4e44-ac08-8e9d7e0d94a7.gif" width="50%" style="max-width: 300px;">
-
-**🎓 Free and paid certification courses across all domains 🎓**
-
-</div>
-
-<div style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%); border-radius: 15px; padding: 2px; margin: 10px 0;">
-<div style="background: white; border-radius: 13px; padding: 0; overflow-x: auto;">
-
-<table style="width: 100%; min-width: 600px;">
-<tr>
-<th>🎯 <strong>Title</strong></th>
-<th>🏢 <strong>Provider</strong></th>
-<th>🔧 <strong>Sector</strong></th>
-<th>⏰ <strong>Deadline</strong></th>
-<th>💰 <strong>Cost</strong></th>
-<th>🚀 <strong>Apply</strong></th>
-</tr>
-<tr>
-<td>🏃‍♂️ <strong>Oracle Cloud Infrastructure</strong></td>
-<td>Oracle University</td>
-<td>Cloud Computing</td>
-<td>Oct 31, 2025</td>
-<td><strong>FREE</strong> 🎉</td>
-<td><a href="https://education.oracle.com/race-to-certification-2025#dataanalytics"><strong>Join Race</strong></a></td>
-</tr>
-<tr>
-<td>🤖 <strong>AI Certification</strong></td>
-<td>Oracle University</td>
-<td>Artificial Intelligence</td>
-<td>Oct 31, 2025</td>
-<td><strong>FREE</strong> 🎉</td>
-<td><a href="https://education.oracle.com/race-to-certification-2025#dataanalytics"><strong>Join Race</strong></a></td>
-</tr>
-<tr>
-<td>☁️ <strong>Multicloud Certification</strong></td>
-<td>Oracle University</td>
-<td>Cloud Computing</td>
-<td>Oct 31, 2025</td>
-<td><strong>FREE</strong> 🎉</td>
-<td><a href="https://education.oracle.com/race-to-certification-2025#dataanalytics"><strong>Join Race</strong></a></td>
-</tr>
-<tr>
-<td>📊 <strong>Data Platform Certification</strong></td>
-<td>Oracle University</td>
-<td>Data Science</td>
-<td>Oct 31, 2025</td>
-<td><strong>FREE</strong> 🎉</td>
-<td><a href="https://education.oracle.com/race-to-certification-2025#dataanalytics"><strong>Join Race</strong></a></td>
-</tr>
-</table>
-
-</div>
-</div>
+✅ **Public Listings** – Browse internships, workshops, certification courses, hackathons, roadmaps, and external resources.  
+✅ **Admin Dashboard** – Add, edit, delete content, and promote items as ads.  
+✅ **User Authentication** – Register, log in, and manage sessions with secure password hashing.  
+✅ **Image Uploads** – Seamless integration with Cloudinary for storing and serving images.  
+✅ **Ad Tracking** – Impression and click tracking endpoints for analytics.  
+✅ **Search & Pagination** – Global search across collections and paginated listings.  
+✅ **Optimized Performance** – Rate limiting, caching, and response compression out of the box.
 
 ---
 
-## 📱 Join Our WhatsApp Community
+## ⚙️ Tech Stack
 
-<div align="center">
-
-<img src="https://user-images.githubusercontent.com/74038190/235294019-40007353-6219-4ec5-b661-b3c35136dd0b.gif" width="70%" style="max-width: 200px;">
-
-### 🌟 **Syntax Syndicate Community**
-
-[![Join WhatsApp](https://img.shields.io/badge/💬%20Join%20WhatsApp%20Community-25D366?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=075e54)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
-[![Follow LinkedIn](https://img.shields.io/badge/💼%20Follow%20on%20LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0066cc)](https://www.linkedin.com/company/syntax-syndicate/)
-
-<img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60%" style="max-width: 150px;">
-
-### **📢 Internship & Certification Alerts Group 🚀**
-
-[![Internship Alerts](https://img.shields.io/badge/🚨%20INTERNSHIP%20&%20CERTIFICATION%20ALERTS-FF4444?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=25D366)](https://chat.whatsapp.com/D5nevD7Yriy4ZIIDMijiAe?mode=ac_t)
-
-</div>
-
-<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 25px; margin: 20px 0; color: white; text-align: center;">
-
-### 🎯 **What Our Community Offers:**
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
-
-<div style="padding: 10px;">
-<strong>⚡Fresh Opportunities:</strong><br>
-<em>----Daily internship alerts</em>
-</div>
-
-<div style="padding: 10px;">
-<strong>🤝Student Network:</strong><br>
-<em>----100+ active students</em>
-</div>
-
-<div style="padding: 10px;">
-<strong>💡Career Guidance:</strong><br>
-<em>----Tips & success strategies</em>
-</div>
-
-<div style="padding: 10px;">
-<strong>🎉Success Celebrations:</strong><br>
-<em>----Share your wins with us</em>
-
-</div>
-
-</div>
-</div>
+| **Category**       | **Technologies**                                                                               |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| **Backend**        | Python 3.10+, Flask, PyMongo                                                                   |
+| **Database**       | MongoDB (Atlas or self-hosted)                                                                 |
+| **Image Storage**  | Cloudinary                                                                                     |
+| **Extensions**     | Flask-CORS, Flask-Limiter, Flask-Caching, Flask-Compress                                       |
+| **Frontend**       | HTML5, CSS3, JavaScript (vanilla – easily upgradable to modern frameworks)                     |
+| **Deployment**     | Render (example), Gunicorn + Nginx recommended for production                                  |
 
 ---
 
-## 🎯 How to Use This Repository
+## 📦 Requirements
 
-### 📖 **For Students:**
-1. **Browse the tables** above for opportunities
-2. **Click "Apply Now"** to go directly to applications
-3. **Bookmark this page** for easy access
-4. **Join our WhatsApp** for real-time updates
+- Python 3.10 or higher
+- MongoDB instance (local or Atlas)
+- Cloudinary account (free tier works)
+- Git
 
-### 📱 **Quick Access:**
-- **Mobile users:** Save this page to your home screen
-- **Desktop users:** Bookmark (Ctrl+D) for quick access
-- **WhatsApp sharing:** Share this GitHub link directly
-
-### 🔍 **Search Tips:**
-- Use **Ctrl+F** (or Cmd+F on Mac) to search for specific companies
-- Look for **"FREE"** opportunities if you're on a budget
-- Check **"Self-paced"** for flexible timing
-- Filter by **sector** to find your domain
+All Python dependencies are listed in [`requirements.txt`](requirements.txt).
 
 ---
 
-## 💡 Quick Tips for Success
+## 🚀 Quick Start
 
-<details>
-<summary><strong>🎯 Click to see application strategies</strong></summary>
+### 1. Clone the repository
+```bash
+git clone https://github.com/Adinath-Jagtap/Internships-Certifications-Website.git
+cd Internships-Certifications-Website
+```
 
-### 📝 **For Internships:**
-- Apply within **48 hours** of seeing the opportunity
-- **Customize your resume** for each application
-- **Research the company** before applying
-- **Follow up** professionally after 1-2 weeks
+### 2. Create and activate a virtual environment
+```bash
+python -m venv .venv
+source .venv/bin/activate      # Linux/macOS
+.venv\Scripts\activate          # Windows
+```
 
-### 🏆 **For Certifications:**
-- Start with **FREE** certifications to build confidence
-- Focus on **in-demand skills** in your field
-- **Add completed certificates** to your LinkedIn immediately
-- **Share your achievements** in our WhatsApp group
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
-### 🚀 **General Success Tips:**
-- **Build projects** related to your target field
-- **Network actively** in our community
-- **Help others** - it comes back to you
-- **Stay consistent** with your applications
+### 4. Set up environment variables
+Create a `.env` file in the project root (see [Environment Variables](#-environment-variables) for details).
 
-</details>
-
----
-
-## 🤝 How to Contribute
-
-**Found a great opportunity?** Help your fellow students!
-
-### 📝 **How to suggest new opportunities:**
-1. **Share it with WhatsApp group Admin** with all details
-2. **Format:** Company name, role, sector, deadline, type, link
-3. **I'll add it** to this repository within 24 hours
-4. **Credit:** Your name will be mentioned as contributor
-
-### ✅ **What information to include:**
-- Complete opportunity title
-- Company/provider name  
-- Relevant sector (Data Science, Cybersecurity, etc.)
-- Application deadline or "No deadline"
-- Type (Virtual/Traditional/Free/Paid)
-- Working application link
+### 5. Run the application
+```bash
+python app.py
+```
+Visit `http://localhost:5000` in your browser.
 
 ---
 
+## 🔐 Environment Variables
 
+Create a `.env` file with the following variables. **Never commit this file!**
+
+| Variable                   | Description                                                              | Example                                                            |
+| -------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `SECRET_KEY`               | Flask session secret (required in production)                            | `your-strong-secret-key`                                           |
+| `MONGO_URI`                | MongoDB connection string                                                | `mongodb+srv://user:pass@cluster0.mongodb.net/community_platform`  |
+| `CLOUDINARY_CLOUD_NAME`    | Cloudinary cloud name                                                    | `your_cloud_name`                                                  |
+| `CLOUDINARY_API_KEY`       | Cloudinary API key                                                       | `your_api_key`                                                     |
+| `CLOUDINARY_API_SECRET`    | Cloudinary API secret                                                    | `your_api_secret`                                                  |
+| `ADMIN_USERNAME`           | Admin dashboard username (change default!)                               | `admin` (default)                                                  |
+| `ADMIN_PASSWORD`           | Admin dashboard password (change default!)                               | `admin123` (default)                                                |
+| `PORT`                     | Port for the Flask server (default: 5000)                                | `5000`                                                              |
 
 ---
 
-## 🆘 Need Help?
+## 🗄️ Database & Indexes
 
-<div align="center">
+- The app connects to MongoDB using the `MONGO_URI` and expects a database named **`community_platform`** (adjustable in the connection string).
+- Collections used:
+  - `users`
+  - `jobs_internships`
+  - `workshops`
+  - `courses`
+  - `hackathons`
+  - `roadmaps`
+  - `websites`
+  - `advertisements`
+  - `ad_clicks`
+- Indexes (e.g., unique email, text indexes, timestamp indexes) are automatically created on startup by `app.py` to optimize search and performance.
 
-### 💬 **Join Our Community for Support**
+---
 
-[![GENERAL CHAT](https://img.shields.io/badge/💬%20GENERAL%20CHAT-25D366?style=for-the-badge&logo=whatsapp&logoColor=black)](https://chat.whatsapp.com/BgPJZex6NbsKZE59XXyMd8?mode=ac_t)
+## 📡 API Endpoints
 
-**"ASK YOUR DOUBT IN OUR GENERAL CHAT GROUP"**
+| Endpoint                         | Method | Description                                 |
+| -------------------------------- | ------ | ------------------------------------------- |
+| `/`                              | GET    | Homepage                                    |
+| `/jobs`                          | GET    | Paginated jobs/internships                  |
+| `/workshops`                     | GET    | Workshops listing                           |
+| `/courses`                       | GET    | Courses listing                             |
+| `/hackathons`                    | GET    | Hackathons listing                          |
+| `/roadmaps`                      | GET    | Roadmaps listing                            |
+| `/websites`                      | GET    | External resources listing                   |
+| `/api/get-ads`                   | GET    | Retrieve active ads (randomized)            |
+| `/ad/impression/<ad_id>`         | POST   | Record an ad impression                      |
+| `/ad/click/<ad_id>`              | POST   | Record an ad click (saves to `ad_clicks`)    |
+| `/api/search?q=<term>`           | GET    | Global search across all collections         |
+| `/login`, `/register`, `/logout` | *      | Session‑based authentication endpoints       |
 
-</div>
+> ⚠️ **All routes and their exact behavior are defined in `app.py` – always check there for the latest implementations.**
+
+---
+
+## ☁️ Deployment Notes
+
+- Use a managed MongoDB (like [MongoDB Atlas](https://www.mongodb.com/atlas)) for production.
+- Set all required environment variables in your hosting provider (Render, Heroku, etc.).
+- The app expects a `PORT` environment variable on most PaaS platforms.
+- **Do not use `app.run()` in production** – deploy with a production WSGI server like Gunicorn behind a reverse proxy (Nginx).
+- Example Gunicorn command:
+  ```bash
+  gunicorn -w 4 -b 0.0.0.0:$PORT app:app
+  ```
+
+---
+
+## 🛡️ Security Checklist
+
+- [ ] **Change default admin credentials** (`ADMIN_USERNAME` / `ADMIN_PASSWORD`).
+- [ ] **Use a strong `SECRET_KEY`** (generate with `os.urandom(24)`).
+- [ ] **Enable HTTPS** and set secure cookie flags (`SESSION_COOKIE_SECURE=True`, `SESSION_COOKIE_HTTPONLY=True`).
+- [ ] **Create a MongoDB user with least‑privilege permissions** (read/write only to required collections).
+- [ ] **Validate and sanitize all user inputs** (forms, file uploads).
+- [ ] **Limit file upload sizes** and verify images before sending to Cloudinary.
+- [ ] **Monitor rate‑limiting** (configured via Flask-Limiter) and set up alerts for suspicious activity.
+- [ ] **Keep dependencies updated** – regularly run `pip-audit` or similar tools.
+
+---
+
+## 🎨 Upgrades & Enhancements
+
+To transform this project into a truly modern, eye‑catching platform, consider implementing these improvements:
+
+### Frontend
+- **CSS Framework** – Replace vanilla CSS with **Tailwind CSS** or **Bootstrap 5** for a sleek, responsive design.
+- **Component‑based UI** – Introduce a lightweight frontend framework like **Alpine.js** or **Vue.js** for dynamic components (search, modals, infinite scroll).
+- **Animations** – Add subtle scroll animations using **AOS (Animate on Scroll)** or **GSAP**.
+- **Dark Mode** – Implement a theme toggle with CSS variables.
+- **Icons** – Use **Font Awesome** or **Heroicons** for consistent, modern icons.
+
+### Backend & Performance
+- **API Blueprint** – Refactor `app.py` into Flask Blueprints for better maintainability.
+- **Caching** – Implement Redis for session storage and advanced caching (beyond Flask-Caching’s simple cache).
+- **Search** – Replace basic text search with **Elasticsearch** or **MongoDB Atlas Search** for better relevance.
+- **File Uploads** – Add image preview and cropping before upload.
+
+### DevOps & CI/CD
+- **Testing** – Add unit and integration tests (pytest) and run them via GitHub Actions.
+- **Containerization** – Provide a `Dockerfile` and `docker-compose.yml` for easy local development and deployment.
+- **Monitoring** – Integrate an error tracker like **Sentry** and performance monitoring with **New Relic**.
+
+### Additional Features
+- **Email Notifications** – Notify users about new opportunities matching their interests.
+- **Social Login** – Allow sign‑in with Google/GitHub for smoother onboarding.
+- **Bookmarking** – Let users save their favorite listings.
+- **Comments/Ratings** – Enable community feedback on opportunities.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork** the repository.
+2. Create a **feature branch**: `git checkout -b feat/your-feature`.
+3. **Commit** your changes with clear messages.
+4. **Push** to your branch and open a **Pull Request**.
+
+Please ensure your code follows existing style conventions and includes appropriate comments. For major changes, open an issue first to discuss what you'd like to change.
 
 ---
 
 <div align="center">
-
-<img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="100" style="max-width: 100px;">
-
-## 🚀 **Ready to Transform Your Career?**
-
-*Join 100+ ambitious students on their success journey*
-
-[![Join Syntax Syndicate](https://img.shields.io/badge/🌟%20JOIN%20SYNTAX%20SYNDICATE%20NOW-FF6B6B?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=25D366)](https://chat.whatsapp.com/E4uMWsORJwwAd4vt1Dx8ZZ?mode=ac_t)
-[![Connect on LinkedIn](https://img.shields.io/badge/💼%20CONNECT%20ON%20LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/syntax-syndicate/)
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" style="max-width: 500px;">
-
----
-
-**✨ Crafted with Love by the Syntax Syndicate Community ✨ - ADINATH SOMNATH JAGTAP**
-
-*⭐ Star this repository if it's accelerating your career journey! ⭐*
-
-<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=600&size=18&duration=2000&pause=500&color=6C63FF&center=true&vCenter=true&width=500&lines=Weekly+Fresh+Content;Your+Success+Is+Our+Mission!">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=150&section=footer&text=Happy%20Learning!&fontSize=50&fontColor=ffffff&animation=twinkling" width="100%">
+  
+  **Made with ❤️ by [Adinath Jagtap](https://github.com/Adinath-Jagtap)**  
+  ⭐ Star this repo if you find it useful!  
+  [Report Bug](https://github.com/Adinath-Jagtap/Internships-Certifications-Website/issues) · [Request Feature](https://github.com/Adinath-Jagtap/Internships-Certifications-Website/issues)
 
 </div>
+
+---
