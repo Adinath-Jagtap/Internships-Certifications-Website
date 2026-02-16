@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard - Community Platform</title>
+    <meta property="og:title" content="User Dashboard - Community Platform">
+    <link rel="icon" type="image/png" href="/static/logo.png">
 
     <style>
     * {
@@ -764,16 +766,17 @@
 let currentAdId = null;
 let cornerAdId = null;
 let popupShown = false;
+let cornerAdInterval = null; // Store interval ID for cleanup
+let allAds = []; // Store all fetched ads
 
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch and display ads
     fetchAds();
     
-    // Show popup ad after 5 seconds
+    // Show popup ad after 5 seconds (ALWAYS on every page load)
     setTimeout(function() {
-        if (!popupShown && !sessionStorage.getItem('ad_popup_shown')) {
+        if (!popupShown) {
             showPopupAd();
-            sessionStorage.setItem('ad_popup_shown', 'true');
         }
     }, 5000);
 });
@@ -782,8 +785,10 @@ function fetchAds() {
     fetch('/api/get-ads')
         .then(response => response.json())
         .then(ads => {
-            console.log('Ads fetched:', ads); // Debug
+            console.log('Ads fetched:', ads);
             if (ads && ads.length > 0) {
+                allAds = ads; // Store all ads for rotation
+                
                 // Show popup ad (first ad)
                 if (ads[0]) {
                     setupPopupAd(ads[0]);
@@ -793,6 +798,9 @@ function fetchAds() {
                 if (ads[1]) {
                     setupCornerAd(ads[1]);
                 }
+                
+                // Start corner ad rotation every 15 seconds
+                startCornerAdRotation();
             }
         })
         .catch(error => console.error('Error fetching ads:', error));
@@ -821,6 +829,35 @@ function setupCornerAd(ad) {
     }, 10000);
 }
 
+// NEW: Corner ad rotation every 15 seconds
+function startCornerAdRotation() {
+    let currentAdIndex = 1; // Start from second ad (first is popup)
+    
+    // Clear any existing interval
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+    
+    // Rotate corner ad every 15 seconds
+    cornerAdInterval = setInterval(function() {
+        if (allAds && allAds.length > 1) {
+            // Get next ad (cycle through all ads)
+            currentAdIndex = (currentAdIndex + 1) % allAds.length;
+            const nextAd = allAds[currentAdIndex];
+            
+            // Update corner ad
+            cornerAdId = nextAd._id;
+            document.getElementById('corner-ad-img').src = nextAd.image || '';
+            document.getElementById('corner-ad-link').href = nextAd.link || '#';
+            
+            // Track impression for new ad
+            trackAdImpression(nextAd._id);
+            
+            console.log('Corner ad rotated to:', nextAd.title);
+        }
+    }, 18000); // 15 seconds
+}
+
 function showPopupAd() {
     const popup = document.getElementById('ad-popup');
     if (popup && currentAdId) {
@@ -837,7 +874,13 @@ function closeAdPopup() {
 }
 
 function closeCornerAd() {
-    document.getElementById('corner-ad').style.display = 'none';
+    const cornerAd = document.getElementById('corner-ad');
+    cornerAd.style.display = 'none';
+    
+    // Show corner ad again after 30 seconds (instead of stopping rotation)
+    setTimeout(function() {
+        cornerAd.style.display = 'block';
+    }, 30000);
 }
 
 function trackAdClick() {
@@ -880,7 +923,15 @@ document.addEventListener('keydown', function(event) {
         closeAdPopup();
     }
 });
+
+// Cleanup interval when page unloads
+window.addEventListener('beforeunload', function() {
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+});
 </script>
+
 </body>
 </html>
 

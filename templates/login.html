@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Community Platform</title>
+    <meta property="og:title" content="Login - Community Platform">
+    <link rel="icon" type="image/png" href="/static/logo.png">
     <style>
         * {
             margin: 0;
@@ -24,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* Animated Background Pattern */
         body::before {
             content: "";
             position: absolute;
@@ -47,7 +48,6 @@
             }
         }
 
-        /* Login Container */
         .login-container {
             width: 100%;
             max-width: 440px;
@@ -67,7 +67,6 @@
             }
         }
 
-        /* Login Box */
         .login-box {
             background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -91,7 +90,6 @@
             background-clip: text;
         }
 
-        /* Alert Messages */
         .alert {
             padding: 14px 18px;
             border-radius: 10px;
@@ -137,7 +135,6 @@
             color: #64b5f6;
         }
 
-        /* Form Styles */
         form {
             display: flex;
             flex-direction: column;
@@ -183,7 +180,6 @@
             border-color: rgba(255, 255, 255, 0.15);
         }
 
-        /* Button Styles */
         .btn-primary {
             padding: 14px 24px;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
@@ -210,7 +206,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
-        /* Login Footer */
         .login-footer {
             margin-top: 32px;
             text-align: center;
@@ -250,7 +245,6 @@
             width: 100%;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .login-container {
                 max-width: 420px;
@@ -349,14 +343,12 @@
             }
         }
 
-        /* Loading State */
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* Focus Visible for Accessibility */
         *:focus-visible {
             outline: 2px solid rgba(255, 255, 255, 0.3);
             outline-offset: 2px;
@@ -377,6 +369,10 @@
             {% endwith %}
             
             <form method="POST" action="{{ url_for('login') }}">
+                {% if request.args.get('next') %}
+                    <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+                {% endif %}
+                
                 <div class="form-group">
                     <label for="email">Email / Username</label>
                     <input type="text" id="email" name="email" required autocomplete="username">
@@ -391,7 +387,7 @@
             </form>
             
             <div class="login-footer">
-                <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+                <p>Don't have an account? <a href="{{ url_for('register', next=request.args.get('next')) }}">Register here</a></p>
             </div>
         </div>
     </div>

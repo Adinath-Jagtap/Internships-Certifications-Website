@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Community Platform</title>
+    <meta property="og:title" content="Register - Community Platform">
+    <link rel="icon" type="image/png" href="/static/logo.png">
     <style>
         * {
             margin: 0;
@@ -25,7 +27,6 @@
             overflow-y: auto;
         }
 
-        /* Animated Background Pattern */
         body::before {
             content: "";
             position: absolute;
@@ -48,7 +49,6 @@
             }
         }
 
-        /* Register Container */
         .register-container {
             width: 100%;
             max-width: 520px;
@@ -69,7 +69,6 @@
             }
         }
 
-        /* Register Box */
         .register-box {
             background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -93,7 +92,6 @@
             background-clip: text;
         }
 
-        /* Alert Messages */
         .alert {
             padding: 14px 18px;
             border-radius: 10px;
@@ -139,7 +137,6 @@
             color: #64b5f6;
         }
 
-        /* Form Styles */
         form {
             display: flex;
             flex-direction: column;
@@ -191,7 +188,6 @@
             margin-top: -4px;
         }
 
-        /* Button Styles */
         .btn-primary {
             padding: 14px 24px;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
@@ -218,7 +214,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
-        /* Register Footer */
         .register-footer {
             margin-top: 32px;
             text-align: center;
@@ -258,7 +253,6 @@
             width: 100%;
         }
 
-        /* Form Grid for Better Layout */
         @media (min-width: 769px) {
             .form-row {
                 display: grid;
@@ -267,7 +261,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 30px 20px;
@@ -374,20 +367,17 @@
             }
         }
 
-        /* Loading State */
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* Focus Visible for Accessibility */
         *:focus-visible {
             outline: 2px solid rgba(255, 255, 255, 0.3);
             outline-offset: 2px;
         }
 
-        /* Password Strength Indicator (Optional Enhancement) */
         .password-strength {
             height: 3px;
             background: rgba(255, 255, 255, 0.1);
@@ -418,6 +408,10 @@
             {% endwith %}
             
             <form method="POST" action="{{ url_for('register') }}">
+                {% if request.args.get('next') %}
+                    <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+                {% endif %}
+                
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required autocomplete="name">
@@ -448,7 +442,7 @@
             </form>
             
             <div class="register-footer">
-                <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+                <p>Already have an account? <a href="{{ url_for('login', next=request.args.get('next')) }}">Login here</a></p>
             </div>
         </div>
     </div>

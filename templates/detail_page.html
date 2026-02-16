@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ item.name or item.role or item.title }} - Community Platform</title>
+    <meta property="og:title" content="Syntax Syndicate - Community Platform">
     <meta name="description" content="{{ item.description[:160] if item.description else 'View details' }}">
+    <link rel="icon" type="image/png" href="/static/logo.png">
     <style>
     * {
         margin: 0;
@@ -114,12 +116,13 @@
         color: #888888;
     }
 
-    .icon-clock::before { content: "🕒"; font-size: 16px; }
-    .icon-tag::before { content: "🏷️"; font-size: 16px; }
-    .icon-location::before { content: "📍"; font-size: 16px; }
-    .icon-calendar::before { content: "📅"; font-size: 16px; }
-    .icon-external::before { content: "🚀"; font-size: 16px; }
-    .icon-share::before { content: "🔗"; font-size: 16px; }
+    .meta-icon {
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     /* Detail Sections */
     .detail-description,
@@ -409,9 +412,13 @@
         align-items: flex-start;
     }
 
-    .info-item i {
-        font-size: 20px;
+    .info-item .info-icon {
+        width: 20px;
+        height: 20px;
         margin-top: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .info-item div {
@@ -482,6 +489,13 @@
     .related-meta {
         font-size: 12px;
         color: #666666;
+    }
+
+    /* SVG Icons */
+    .icon-svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
     }
 
     /* Responsive Design */
@@ -604,6 +618,335 @@
             padding: 16px;
         }
     }
+
+    /* Ad Popup Styles */
+    .ad-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .ad-popup-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(4px);
+    }
+
+    .ad-popup-content {
+        position: relative;
+        background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+        border-radius: 16px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 85vh;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .ad-popup-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+        font-size: 28px;
+        color: #e0e0e0;
+        line-height: 1;
+    }
+
+    .ad-popup-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: rotate(90deg);
+    }
+
+    .ad-popup-body {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        max-height: 85vh;
+    }
+
+    .ad-popup-image {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        background: #0a0a0a;
+        position: relative;
+    }
+
+    .ad-popup-image::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, #1a1a1a, transparent);
+    }
+
+    .ad-popup-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .ad-popup-info {
+        padding: 32px 28px;
+    }
+
+    .ad-popup-info h3 {
+        margin: 0 0 16px 0;
+        font-size: 26px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.3;
+    }
+
+    .ad-popup-info p {
+        margin: 0 0 24px 0;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #b0b0b0;
+    }
+
+    /* Corner Ad Styles */
+    .corner-ad {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 280px;
+        max-width: calc(100vw - 48px);
+        background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+        z-index: 9999;
+        display: none;
+        animation: slideInCorner 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideInCorner {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .corner-ad-close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+        font-size: 24px;
+        color: #e0e0e0;
+        line-height: 1;
+    }
+
+    .corner-ad-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: rotate(90deg);
+    }
+
+    .corner-ad a {
+        display: block;
+    }
+
+    .corner-ad img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .corner-ad:hover img {
+        transform: scale(1.03);
+    }
+
+    /* Tablet Responsive */
+    @media (max-width: 1024px) {
+        .corner-ad {
+            width: 260px;
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .corner-ad img {
+            max-height: 350px;
+        }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .ad-popup-content {
+            width: 95%;
+            max-width: 500px;
+        }
+        
+        .ad-popup-image {
+            height: 220px;
+        }
+        
+        .ad-popup-info {
+            padding: 24px 20px;
+        }
+        
+        .ad-popup-info h3 {
+            font-size: 22px;
+        }
+        
+        .corner-ad {
+            width: 240px;
+            bottom: 16px;
+            right: 16px;
+        }
+        
+        .corner-ad img {
+            max-height: 300px;
+        }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 480px) {
+        .ad-popup-content {
+            width: 96%;
+            max-width: 400px;
+        }
+        
+        .ad-popup-image {
+            height: 180px;
+        }
+        
+        .ad-popup-info {
+            padding: 20px 16px;
+        }
+        
+        .ad-popup-info h3 {
+            font-size: 20px;
+        }
+        
+        .ad-popup-info p {
+            font-size: 14px;
+        }
+        
+        .corner-ad {
+            width: 200px;
+            bottom: 12px;
+            right: 12px;
+        }
+        
+        .corner-ad img {
+            max-height: 250px;
+        }
+        
+        .corner-ad-close {
+            width: 28px;
+            height: 28px;
+            top: 6px;
+            right: 6px;
+        }
+    }
+
+    /* Extra Small Devices */
+    @media (max-width: 360px) {
+        .ad-popup-content {
+            width: 98%;
+        }
+        
+        .ad-popup-image {
+            height: 160px;
+        }
+        
+        .ad-popup-info {
+            padding: 16px 12px;
+        }
+        
+        .ad-popup-info h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .ad-popup-info p {
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        
+        .corner-ad {
+            width: 180px;
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .corner-ad img {
+            max-height: 220px;
+        }
+    }
+
+    /* Landscape orientation adjustments */
+    @media (max-height: 600px) and (orientation: landscape) {
+        .corner-ad {
+            width: 200px;
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .corner-ad img {
+            max-height: 200px;
+        }
+    }
 </style>
     
     <!-- Open Graph Meta Tags for Social Sharing -->
@@ -647,18 +990,33 @@
                             <h1>{{ item.name or item.role or item.title }}</h1>
                             <div class="detail-meta">
                                 <span class="meta-item">
-                                    <i class="icon-clock"></i>
+                                    <span class="meta-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </span>
                                     {{ item.time_ago }}
                                 </span>
                                 {% if item.domain %}
                                 <span class="meta-item">
-                                    <i class="icon-tag"></i>
+                                    <span class="meta-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                        </svg>
+                                    </span>
                                     {{ item.domain }}
                                 </span>
                                 {% endif %}
                                 {% if item.location %}
                                 <span class="meta-item">
-                                    <i class="icon-location"></i>
+                                    <span class="meta-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </span>
                                     {{ item.location }}
                                 </span>
                                 {% endif %}
@@ -824,11 +1182,9 @@
 
                         <div class="detail-actions">
                             <button id="apply-btn" class="btn-primary btn-large">
-                                <i class="icon-external"></i>
                                 Apply Now
                             </button>
                             <button class="btn-outline share-btn" onclick="shareContent()">
-                                <i class="icon-share"></i>
                                 Share
                             </button>
                         </div>
@@ -844,16 +1200,16 @@
                                 <div class="modal-body">
                                     <div class="share-links">
                                         <a href="#" class="share-link" onclick="shareOn('whatsapp')">
-                                            <i class="icon-whatsapp"></i> WhatsApp
+                                            WhatsApp
                                         </a>
                                         <a href="#" class="share-link" onclick="shareOn('telegram')">
-                                            <i class="icon-telegram"></i> Telegram
+                                            Telegram
                                         </a>
                                         <a href="#" class="share-link" onclick="shareOn('twitter')">
-                                            <i class="icon-twitter"></i> Twitter
+                                            Twitter
                                         </a>
                                         <a href="#" class="share-link" onclick="shareOn('linkedin')">
-                                            <i class="icon-linkedin"></i> LinkedIn
+                                            LinkedIn
                                         </a>
                                     </div>
                                     <div class="copy-link">
@@ -871,7 +1227,14 @@
                             <div class="quick-info">
                                 {% if item.posted_at %}
                                 <div class="info-item">
-                                    <i class="icon-calendar"></i>
+                                    <span class="info-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                    </span>
                                     <div>
                                         <span class="info-label">Posted</span>
                                         <span class="info-value">{{ item.time_ago }}</span>
@@ -880,7 +1243,12 @@
                                 {% endif %}
                                 {% if item.domain %}
                                 <div class="info-item">
-                                    <i class="icon-tag"></i>
+                                    <span class="info-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                        </svg>
+                                    </span>
                                     <div>
                                         <span class="info-label">Domain</span>
                                         <span class="info-value">{{ item.domain }}</span>
@@ -889,7 +1257,12 @@
                                 {% endif %}
                                 {% if item.location %}
                                 <div class="info-item">
-                                    <i class="icon-location"></i>
+                                    <span class="info-icon">
+                                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </span>
                                     <div>
                                         <span class="info-label">Location</span>
                                         <span class="info-value">{{ item.location }}</span>
@@ -1005,6 +1378,7 @@
             }
         });
     </script>
+
 <!-- Ad Popup -->
 <div class="ad-popup" id="ad-popup" style="display: none;">
     <div class="ad-popup-overlay" onclick="closeAdPopup()"></div>
@@ -1367,16 +1741,17 @@
 let currentAdId = null;
 let cornerAdId = null;
 let popupShown = false;
+let cornerAdInterval = null; // Store interval ID for cleanup
+let allAds = []; // Store all fetched ads
 
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch and display ads
     fetchAds();
     
-    // Show popup ad after 5 seconds
+    // Show popup ad after 5 seconds (ALWAYS on every page load)
     setTimeout(function() {
-        if (!popupShown && !sessionStorage.getItem('ad_popup_shown')) {
+        if (!popupShown) {
             showPopupAd();
-            sessionStorage.setItem('ad_popup_shown', 'true');
         }
     }, 5000);
 });
@@ -1385,8 +1760,10 @@ function fetchAds() {
     fetch('/api/get-ads')
         .then(response => response.json())
         .then(ads => {
-            console.log('Ads fetched:', ads); // Debug
+            console.log('Ads fetched:', ads);
             if (ads && ads.length > 0) {
+                allAds = ads; // Store all ads for rotation
+                
                 // Show popup ad (first ad)
                 if (ads[0]) {
                     setupPopupAd(ads[0]);
@@ -1396,6 +1773,9 @@ function fetchAds() {
                 if (ads[1]) {
                     setupCornerAd(ads[1]);
                 }
+                
+                // Start corner ad rotation every 15 seconds
+                startCornerAdRotation();
             }
         })
         .catch(error => console.error('Error fetching ads:', error));
@@ -1424,6 +1804,35 @@ function setupCornerAd(ad) {
     }, 10000);
 }
 
+// NEW: Corner ad rotation every 15 seconds
+function startCornerAdRotation() {
+    let currentAdIndex = 1; // Start from second ad (first is popup)
+    
+    // Clear any existing interval
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+    
+    // Rotate corner ad every 15 seconds
+    cornerAdInterval = setInterval(function() {
+        if (allAds && allAds.length > 1) {
+            // Get next ad (cycle through all ads)
+            currentAdIndex = (currentAdIndex + 1) % allAds.length;
+            const nextAd = allAds[currentAdIndex];
+            
+            // Update corner ad
+            cornerAdId = nextAd._id;
+            document.getElementById('corner-ad-img').src = nextAd.image || '';
+            document.getElementById('corner-ad-link').href = nextAd.link || '#';
+            
+            // Track impression for new ad
+            trackAdImpression(nextAd._id);
+            
+            console.log('Corner ad rotated to:', nextAd.title);
+        }
+    }, 18000); // 15 seconds
+}
+
 function showPopupAd() {
     const popup = document.getElementById('ad-popup');
     if (popup && currentAdId) {
@@ -1440,7 +1849,13 @@ function closeAdPopup() {
 }
 
 function closeCornerAd() {
-    document.getElementById('corner-ad').style.display = 'none';
+    const cornerAd = document.getElementById('corner-ad');
+    cornerAd.style.display = 'none';
+    
+    // Show corner ad again after 30 seconds (instead of stopping rotation)
+    setTimeout(function() {
+        cornerAd.style.display = 'block';
+    }, 30000);
 }
 
 function trackAdClick() {
@@ -1483,9 +1898,14 @@ document.addEventListener('keydown', function(event) {
         closeAdPopup();
     }
 });
+
+// Cleanup interval when page unloads
+window.addEventListener('beforeunload', function() {
+    if (cornerAdInterval) {
+        clearInterval(cornerAdInterval);
+    }
+});
 </script>
-    
+
 </body>
 </html>
-
-
