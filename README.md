@@ -1,9 +1,8 @@
 # <div align="center">🎯 **Internships & Certifications Hub**</div>
 
-
 <div align="center">
 
-### *Your Gateway to Opportunities — All in One Place*
+### *Your Gateway to Opportunities — All in One Place 🎯*
 
 <br>
 
